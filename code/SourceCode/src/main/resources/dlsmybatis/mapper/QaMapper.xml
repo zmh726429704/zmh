@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="QaMapper" >
+  <resultMap id="BaseResultMap" type="com.hn.dls.entity.Qa" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="FK_ARTICLE_ID" property="fkArticleId" jdbcType="INTEGER" />
+    <result column="QUESTION" property="question" jdbcType="VARCHAR" />
+    <result column="SORT_ID" property="sortId" jdbcType="INTEGER" />
+    <result column="CLICK" property="click" jdbcType="INTEGER" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hn.dls.entity.Qa" extends="BaseResultMap" >
+    <result column="ANSWER" property="answer" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, FK_ARTICLE_ID, QUESTION, SORT_ID, CLICK, ADD_TIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    ANSWER
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dls_qa
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dls_qa
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hn.dls.entity.Qa" >
+    insert into dls_qa (ID, FK_ARTICLE_ID, QUESTION, 
+      SORT_ID, CLICK, ADD_TIME, 
+      ANSWER)
+    values (#{id,jdbcType=INTEGER}, #{fkArticleId,jdbcType=INTEGER}, #{question,jdbcType=VARCHAR}, 
+      #{sortId,jdbcType=INTEGER}, #{click,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP}, 
+      #{answer,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hn.dls.entity.Qa" >
+    insert into dls_qa
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fkArticleId != null" >
+        FK_ARTICLE_ID,
+      </if>
+      <if test="question != null" >
+        QUESTION,
+      </if>
+      <if test="sortId != null" >
+        SORT_ID,
+      </if>
+      <if test="click != null" >
+        CLICK,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="answer != null" >
+        ANSWER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fkArticleId != null" >
+        #{fkArticleId,jdbcType=INTEGER},
+      </if>
+      <if test="question != null" >
+        #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="sortId != null" >
+        #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="click != null" >
+        #{click,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hn.dls.entity.Qa" >
+    update dls_qa
+    <set >
+      <if test="fkArticleId != null" >
+        FK_ARTICLE_ID = #{fkArticleId,jdbcType=INTEGER},
+      </if>
+      <if test="question != null" >
+        QUESTION = #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="sortId != null" >
+        SORT_ID = #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="click != null" >
+        CLICK = #{click,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="answer != null" >
+        ANSWER = #{answer,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hn.dls.entity.Qa" >
+    update dls_qa
+    set FK_ARTICLE_ID = #{fkArticleId,jdbcType=INTEGER},
+      QUESTION = #{question,jdbcType=VARCHAR},
+      SORT_ID = #{sortId,jdbcType=INTEGER},
+      CLICK = #{click,jdbcType=INTEGER},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      ANSWER = #{answer,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.Qa" >
+    update dls_qa
+    set FK_ARTICLE_ID = #{fkArticleId,jdbcType=INTEGER},
+      QUESTION = #{question,jdbcType=VARCHAR},
+      SORT_ID = #{sortId,jdbcType=INTEGER},
+      CLICK = #{click,jdbcType=INTEGER},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

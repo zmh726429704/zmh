@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="SiteChannelMapper" >
+  <resultMap id="BaseResultMap" type="com.hn.dls.entity.SiteChannel" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="SORT_ID" property="sortId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, NAME, TITLE, SORT_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dls_site_channel
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dls_site_channel
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hn.dls.entity.SiteChannel" >
+    insert into dls_site_channel (ID, NAME, TITLE, 
+      SORT_ID)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{sortId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hn.dls.entity.SiteChannel" >
+    insert into dls_site_channel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="sortId != null" >
+        SORT_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sortId != null" >
+        #{sortId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hn.dls.entity.SiteChannel" >
+    update dls_site_channel
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sortId != null" >
+        SORT_ID = #{sortId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.SiteChannel" >
+    update dls_site_channel
+    set NAME = #{name,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      SORT_ID = #{sortId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

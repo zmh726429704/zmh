@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="SpecialistAppointmentMapper" >
+  <resultMap id="BaseResultMap" type="com.hn.dls.entity.SpecialistAppointment" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="FK_SP_ID" property="fkSpId" jdbcType="INTEGER" />
+    <result column="FK_USER_ID" property="fkUserId" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="CANCEL_TIME" property="cancelTime" jdbcType="TIMESTAMP" />
+    <result column="MEET_TIME" property="meetTime" jdbcType="TIMESTAMP" />
+    <result column="PUBLISHER" property="publisher" jdbcType="INTEGER" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="IP_ADDRESS" property="ipAddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hn.dls.entity.SpecialistAppointmentWithBLOBs" extends="BaseResultMap" >
+    <result column="DESCRIPTION" property="description" jdbcType="LONGVARCHAR" />
+    <result column="PERSON_DESP" property="personDesp" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, FK_SP_ID, FK_USER_ID, STATUS, CANCEL_TIME, MEET_TIME, PUBLISHER, ADD_TIME, UPDATE_TIME, 
+    IP_ADDRESS
+  </sql>
+  <sql id="Blob_Column_List" >
+    DESCRIPTION, PERSON_DESP
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dls_specialist_appointment
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dls_specialist_appointment
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hn.dls.entity.SpecialistAppointmentWithBLOBs" >
+    insert into dls_specialist_appointment (ID, FK_SP_ID, FK_USER_ID, 
+      STATUS, CANCEL_TIME, MEET_TIME, 
+      PUBLISHER, ADD_TIME, UPDATE_TIME, 
+      IP_ADDRESS, DESCRIPTION, PERSON_DESP
+      )
+    values (#{id,jdbcType=INTEGER}, #{fkSpId,jdbcType=INTEGER}, #{fkUserId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{cancelTime,jdbcType=TIMESTAMP}, #{meetTime,jdbcType=TIMESTAMP}, 
+      #{publisher,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{ipAddress,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR}, #{personDesp,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hn.dls.entity.SpecialistAppointmentWithBLOBs" >
+    insert into dls_specialist_appointment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fkSpId != null" >
+        FK_SP_ID,
+      </if>
+      <if test="fkUserId != null" >
+        FK_USER_ID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="cancelTime != null" >
+        CANCEL_TIME,
+      </if>
+      <if test="meetTime != null" >
+        MEET_TIME,
+      </if>
+      <if test="publisher != null" >
+        PUBLISHER,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="ipAddress != null" >
+        IP_ADDRESS,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="personDesp != null" >
+        PERSON_DESP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fkSpId != null" >
+        #{fkSpId,jdbcType=INTEGER},
+      </if>
+      <if test="fkUserId != null" >
+        #{fkUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="cancelTime != null" >
+        #{cancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meetTime != null" >
+        #{meetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publisher != null" >
+        #{publisher,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipAddress != null" >
+        #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="personDesp != null" >
+        #{personDesp,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hn.dls.entity.SpecialistAppointmentWithBLOBs" >
+    update dls_specialist_appointment
+    <set >
+      <if test="fkSpId != null" >
+        FK_SP_ID = #{fkSpId,jdbcType=INTEGER},
+      </if>
+      <if test="fkUserId != null" >
+        FK_USER_ID = #{fkUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="cancelTime != null" >
+        CANCEL_TIME = #{cancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meetTime != null" >
+        MEET_TIME = #{meetTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publisher != null" >
+        PUBLISHER = #{publisher,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipAddress != null" >
+        IP_ADDRESS = #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="personDesp != null" >
+        PERSON_DESP = #{personDesp,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hn.dls.entity.SpecialistAppointmentWithBLOBs" >
+    update dls_specialist_appointment
+    set FK_SP_ID = #{fkSpId,jdbcType=INTEGER},
+      FK_USER_ID = #{fkUserId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      CANCEL_TIME = #{cancelTime,jdbcType=TIMESTAMP},
+      MEET_TIME = #{meetTime,jdbcType=TIMESTAMP},
+      PUBLISHER = #{publisher,jdbcType=INTEGER},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      IP_ADDRESS = #{ipAddress,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=LONGVARCHAR},
+      PERSON_DESP = #{personDesp,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.SpecialistAppointment" >
+    update dls_specialist_appointment
+    set FK_SP_ID = #{fkSpId,jdbcType=INTEGER},
+      FK_USER_ID = #{fkUserId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      CANCEL_TIME = #{cancelTime,jdbcType=TIMESTAMP},
+      MEET_TIME = #{meetTime,jdbcType=TIMESTAMP},
+      PUBLISHER = #{publisher,jdbcType=INTEGER},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      IP_ADDRESS = #{ipAddress,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

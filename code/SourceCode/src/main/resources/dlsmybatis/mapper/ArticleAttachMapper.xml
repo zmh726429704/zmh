@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ArticleAttachMapper" >
+  <resultMap id="BaseResultMap" type="com.hn.dls.entity.ArticleAttach" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="FK_ARTICLE_ID" property="fkArticleId" jdbcType="INTEGER" />
+    <result column="FILE_NAME" property="fileName" jdbcType="VARCHAR" />
+    <result column="FILE_PATH" property="filePath" jdbcType="VARCHAR" />
+    <result column="FILE_SIZE" property="fileSize" jdbcType="INTEGER" />
+    <result column="FILE_EXT" property="fileExt" jdbcType="VARCHAR" />
+    <result column="DOWN_NUM" property="downNum" jdbcType="INTEGER" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, FK_ARTICLE_ID, FILE_NAME, FILE_PATH, FILE_SIZE, FILE_EXT, DOWN_NUM, ADD_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dls_article_attach
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dls_article_attach
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hn.dls.entity.ArticleAttach" >
+    insert into dls_article_attach (ID, FK_ARTICLE_ID, FILE_NAME, 
+      FILE_PATH, FILE_SIZE, FILE_EXT, 
+      DOWN_NUM, ADD_TIME)
+    values (#{id,jdbcType=INTEGER}, #{fkArticleId,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, 
+      #{filePath,jdbcType=VARCHAR}, #{fileSize,jdbcType=INTEGER}, #{fileExt,jdbcType=VARCHAR}, 
+      #{downNum,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hn.dls.entity.ArticleAttach" >
+    insert into dls_article_attach
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fkArticleId != null" >
+        FK_ARTICLE_ID,
+      </if>
+      <if test="fileName != null" >
+        FILE_NAME,
+      </if>
+      <if test="filePath != null" >
+        FILE_PATH,
+      </if>
+      <if test="fileSize != null" >
+        FILE_SIZE,
+      </if>
+      <if test="fileExt != null" >
+        FILE_EXT,
+      </if>
+      <if test="downNum != null" >
+        DOWN_NUM,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fkArticleId != null" >
+        #{fkArticleId,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        #{fileSize,jdbcType=INTEGER},
+      </if>
+      <if test="fileExt != null" >
+        #{fileExt,jdbcType=VARCHAR},
+      </if>
+      <if test="downNum != null" >
+        #{downNum,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hn.dls.entity.ArticleAttach" >
+    update dls_article_attach
+    <set >
+      <if test="fkArticleId != null" >
+        FK_ARTICLE_ID = #{fkArticleId,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null" >
+        FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        FILE_SIZE = #{fileSize,jdbcType=INTEGER},
+      </if>
+      <if test="fileExt != null" >
+        FILE_EXT = #{fileExt,jdbcType=VARCHAR},
+      </if>
+      <if test="downNum != null" >
+        DOWN_NUM = #{downNum,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.ArticleAttach" >
+    update dls_article_attach
+    set FK_ARTICLE_ID = #{fkArticleId,jdbcType=INTEGER},
+      FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      FILE_SIZE = #{fileSize,jdbcType=INTEGER},
+      FILE_EXT = #{fileExt,jdbcType=VARCHAR},
+      DOWN_NUM = #{downNum,jdbcType=INTEGER},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

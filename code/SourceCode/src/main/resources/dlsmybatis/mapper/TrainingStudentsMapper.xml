@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="TrainingStudentsMapper" >
+  <resultMap id="BaseResultMap" type="com.hn.dls.entity.TrainingStudents" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="FORM_ID" property="formId" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="SEX" property="sex" jdbcType="CHAR" />
+    <result column="ROLE" property="role" jdbcType="VARCHAR" />
+    <result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
+    <result column="E_MAIL" property="eMail" jdbcType="VARCHAR" />
+    <result column="IS_STAY" property="isStay" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, FORM_ID, NAME, SEX, ROLE, TELEPHONE, E_MAIL, IS_STAY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dls_training_students
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dls_training_students
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hn.dls.entity.TrainingStudents" >
+    insert into dls_training_students (ID, FORM_ID, NAME, 
+      SEX, ROLE, TELEPHONE, 
+      E_MAIL, IS_STAY)
+    values (#{id,jdbcType=INTEGER}, #{formId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=CHAR}, #{role,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{eMail,jdbcType=VARCHAR}, #{isStay,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hn.dls.entity.TrainingStudents" >
+    insert into dls_training_students
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="formId != null" >
+        FORM_ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="role != null" >
+        ROLE,
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE,
+      </if>
+      <if test="eMail != null" >
+        E_MAIL,
+      </if>
+      <if test="isStay != null" >
+        IS_STAY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="formId != null" >
+        #{formId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="role != null" >
+        #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="eMail != null" >
+        #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="isStay != null" >
+        #{isStay,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hn.dls.entity.TrainingStudents" >
+    update dls_training_students
+    <set >
+      <if test="formId != null" >
+        FORM_ID = #{formId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="role != null" >
+        ROLE = #{role,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="eMail != null" >
+        E_MAIL = #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="isStay != null" >
+        IS_STAY = #{isStay,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.TrainingStudents" >
+    update dls_training_students
+    set FORM_ID = #{formId,jdbcType=INTEGER},
+      NAME = #{name,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=CHAR},
+      ROLE = #{role,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      E_MAIL = #{eMail,jdbcType=VARCHAR},
+      IS_STAY = #{isStay,jdbcType=CHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

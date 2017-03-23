@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="UserAmountLogMapper" >
+  <resultMap id="BaseResultMap" type="com.hn.dls.entity.UserAmountLog" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="FK_USER_ID" property="fkUserId" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="FK_PAYMENT_ID" property="fkPaymentId" jdbcType="INTEGER" />
+    <result column="VALUE" property="value" jdbcType="DECIMAL" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, FK_USER_ID, USER_NAME, FK_PAYMENT_ID, VALUE, REMARK, ADD_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dls_user_amount_log
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dls_user_amount_log
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hn.dls.entity.UserAmountLog" >
+    insert into dls_user_amount_log (ID, FK_USER_ID, USER_NAME, 
+      FK_PAYMENT_ID, VALUE, REMARK, 
+      ADD_TIME)
+    values (#{id,jdbcType=INTEGER}, #{fkUserId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{fkPaymentId,jdbcType=INTEGER}, #{value,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hn.dls.entity.UserAmountLog" >
+    insert into dls_user_amount_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fkUserId != null" >
+        FK_USER_ID,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="fkPaymentId != null" >
+        FK_PAYMENT_ID,
+      </if>
+      <if test="value != null" >
+        VALUE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fkUserId != null" >
+        #{fkUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="fkPaymentId != null" >
+        #{fkPaymentId,jdbcType=INTEGER},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hn.dls.entity.UserAmountLog" >
+    update dls_user_amount_log
+    <set >
+      <if test="fkUserId != null" >
+        FK_USER_ID = #{fkUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="fkPaymentId != null" >
+        FK_PAYMENT_ID = #{fkPaymentId,jdbcType=INTEGER},
+      </if>
+      <if test="value != null" >
+        VALUE = #{value,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.UserAmountLog" >
+    update dls_user_amount_log
+    set FK_USER_ID = #{fkUserId,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      FK_PAYMENT_ID = #{fkPaymentId,jdbcType=INTEGER},
+      VALUE = #{value,jdbcType=DECIMAL},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
