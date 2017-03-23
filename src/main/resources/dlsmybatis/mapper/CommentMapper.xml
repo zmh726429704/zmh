@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.hn.dls.entity.Comment" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="FK_ARTICLE_ID" property="fkArticleId" jdbcType="VARCHAR" />
+    <result column="FK_USER_ID" property="fkUserId" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="SATISFACTION" property="satisfaction" jdbcType="INTEGER" />
+    <result column="ADD_DATE" property="addDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, FK_ARTICLE_ID, FK_USER_ID, CONTENT, SATISFACTION, ADD_DATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dls_comment
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dls_comment
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hn.dls.entity.Comment" >
+    insert into dls_comment (ID, FK_ARTICLE_ID, FK_USER_ID, 
+      CONTENT, SATISFACTION, ADD_DATE
+      )
+    values (#{id,jdbcType=INTEGER}, #{fkArticleId,jdbcType=VARCHAR}, #{fkUserId,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{satisfaction,jdbcType=INTEGER}, #{addDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hn.dls.entity.Comment" >
+    insert into dls_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fkArticleId != null" >
+        FK_ARTICLE_ID,
+      </if>
+      <if test="fkUserId != null" >
+        FK_USER_ID,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="satisfaction != null" >
+        SATISFACTION,
+      </if>
+      <if test="addDate != null" >
+        ADD_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fkArticleId != null" >
+        #{fkArticleId,jdbcType=VARCHAR},
+      </if>
+      <if test="fkUserId != null" >
+        #{fkUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="satisfaction != null" >
+        #{satisfaction,jdbcType=INTEGER},
+      </if>
+      <if test="addDate != null" >
+        #{addDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hn.dls.entity.Comment" >
+    update dls_comment
+    <set >
+      <if test="fkArticleId != null" >
+        FK_ARTICLE_ID = #{fkArticleId,jdbcType=VARCHAR},
+      </if>
+      <if test="fkUserId != null" >
+        FK_USER_ID = #{fkUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="satisfaction != null" >
+        SATISFACTION = #{satisfaction,jdbcType=INTEGER},
+      </if>
+      <if test="addDate != null" >
+        ADD_DATE = #{addDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.Comment" >
+    update dls_comment
+    set FK_ARTICLE_ID = #{fkArticleId,jdbcType=VARCHAR},
+      FK_USER_ID = #{fkUserId,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      SATISFACTION = #{satisfaction,jdbcType=INTEGER},
+      ADD_DATE = #{addDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

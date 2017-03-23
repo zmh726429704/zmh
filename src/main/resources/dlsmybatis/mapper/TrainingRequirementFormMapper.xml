@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="TrainingRequirementFormMapper" >
+  <resultMap id="BaseResultMap" type="com.hn.dls.entity.TrainingRequirementForm" >
+    <id column="FORM_ID" property="formId" jdbcType="INTEGER" />
+    <result column="COMPANY" property="company" jdbcType="VARCHAR" />
+    <result column="STUDENTS" property="students" jdbcType="INTEGER" />
+    <result column="CONTACTER" property="contacter" jdbcType="VARCHAR" />
+    <result column="CONTACT_TYPE" property="contactType" jdbcType="CHAR" />
+    <result column="E_MAIL" property="eMail" jdbcType="VARCHAR" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="PUBLISHER" property="publisher" jdbcType="INTEGER" />
+    <result column="CREAT_TIME" property="creatTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="IP_ADDRESS" property="ipAddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hn.dls.entity.TrainingRequirementForm" extends="BaseResultMap" >
+    <result column="DESCRIPTION" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FORM_ID, COMPANY, STUDENTS, CONTACTER, CONTACT_TYPE, E_MAIL, CITY, PUBLISHER, CREAT_TIME, 
+    MODIFY_TIME, IP_ADDRESS
+  </sql>
+  <sql id="Blob_Column_List" >
+    DESCRIPTION
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dls_training_requirement_form
+    where FORM_ID = #{formId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dls_training_requirement_form
+    where FORM_ID = #{formId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hn.dls.entity.TrainingRequirementForm" >
+    insert into dls_training_requirement_form (FORM_ID, COMPANY, STUDENTS, 
+      CONTACTER, CONTACT_TYPE, E_MAIL, 
+      CITY, PUBLISHER, CREAT_TIME, 
+      MODIFY_TIME, IP_ADDRESS, DESCRIPTION
+      )
+    values (#{formId,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR}, #{students,jdbcType=INTEGER}, 
+      #{contacter,jdbcType=VARCHAR}, #{contactType,jdbcType=CHAR}, #{eMail,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{publisher,jdbcType=INTEGER}, #{creatTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{ipAddress,jdbcType=VARCHAR}, #{description,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hn.dls.entity.TrainingRequirementForm" >
+    insert into dls_training_requirement_form
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="formId != null" >
+        FORM_ID,
+      </if>
+      <if test="company != null" >
+        COMPANY,
+      </if>
+      <if test="students != null" >
+        STUDENTS,
+      </if>
+      <if test="contacter != null" >
+        CONTACTER,
+      </if>
+      <if test="contactType != null" >
+        CONTACT_TYPE,
+      </if>
+      <if test="eMail != null" >
+        E_MAIL,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="publisher != null" >
+        PUBLISHER,
+      </if>
+      <if test="creatTime != null" >
+        CREAT_TIME,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+      <if test="ipAddress != null" >
+        IP_ADDRESS,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="formId != null" >
+        #{formId,jdbcType=INTEGER},
+      </if>
+      <if test="company != null" >
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="students != null" >
+        #{students,jdbcType=INTEGER},
+      </if>
+      <if test="contacter != null" >
+        #{contacter,jdbcType=VARCHAR},
+      </if>
+      <if test="contactType != null" >
+        #{contactType,jdbcType=CHAR},
+      </if>
+      <if test="eMail != null" >
+        #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null" >
+        #{publisher,jdbcType=INTEGER},
+      </if>
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipAddress != null" >
+        #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hn.dls.entity.TrainingRequirementForm" >
+    update dls_training_requirement_form
+    <set >
+      <if test="company != null" >
+        COMPANY = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="students != null" >
+        STUDENTS = #{students,jdbcType=INTEGER},
+      </if>
+      <if test="contacter != null" >
+        CONTACTER = #{contacter,jdbcType=VARCHAR},
+      </if>
+      <if test="contactType != null" >
+        CONTACT_TYPE = #{contactType,jdbcType=CHAR},
+      </if>
+      <if test="eMail != null" >
+        E_MAIL = #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null" >
+        PUBLISHER = #{publisher,jdbcType=INTEGER},
+      </if>
+      <if test="creatTime != null" >
+        CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ipAddress != null" >
+        IP_ADDRESS = #{ipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where FORM_ID = #{formId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hn.dls.entity.TrainingRequirementForm" >
+    update dls_training_requirement_form
+    set COMPANY = #{company,jdbcType=VARCHAR},
+      STUDENTS = #{students,jdbcType=INTEGER},
+      CONTACTER = #{contacter,jdbcType=VARCHAR},
+      CONTACT_TYPE = #{contactType,jdbcType=CHAR},
+      E_MAIL = #{eMail,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      PUBLISHER = #{publisher,jdbcType=INTEGER},
+      CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP},
+      MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+      IP_ADDRESS = #{ipAddress,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=LONGVARCHAR}
+    where FORM_ID = #{formId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.TrainingRequirementForm" >
+    update dls_training_requirement_form
+    set COMPANY = #{company,jdbcType=VARCHAR},
+      STUDENTS = #{students,jdbcType=INTEGER},
+      CONTACTER = #{contacter,jdbcType=VARCHAR},
+      CONTACT_TYPE = #{contactType,jdbcType=CHAR},
+      E_MAIL = #{eMail,jdbcType=VARCHAR},
+      CITY = #{city,jdbcType=VARCHAR},
+      PUBLISHER = #{publisher,jdbcType=INTEGER},
+      CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP},
+      MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+      IP_ADDRESS = #{ipAddress,jdbcType=VARCHAR}
+    where FORM_ID = #{formId,jdbcType=INTEGER}
+  </update>
+</mapper>

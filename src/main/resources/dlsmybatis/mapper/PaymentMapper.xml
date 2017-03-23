@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="PaymentMapper" >
+  <resultMap id="BaseResultMap" type="com.hn.dls.entity.Payment" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="IMG_URL" property="imgUrl" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="TINYINT" />
+    <result column="POUNDAGE_TYPE" property="poundageType" jdbcType="TINYINT" />
+    <result column="POUNDAGE_AMOUNT" property="poundageAmount" jdbcType="DECIMAL" />
+    <result column="SORT_ID" property="sortId" jdbcType="INTEGER" />
+    <result column="IS_LOCK" property="isLock" jdbcType="TINYINT" />
+    <result column="API_PATH" property="apiPath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TITLE, IMG_URL, REMARK, TYPE, POUNDAGE_TYPE, POUNDAGE_AMOUNT, SORT_ID, IS_LOCK, 
+    API_PATH
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dls_payment
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dls_payment
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hn.dls.entity.Payment" >
+    insert into dls_payment (ID, TITLE, IMG_URL, 
+      REMARK, TYPE, POUNDAGE_TYPE, 
+      POUNDAGE_AMOUNT, SORT_ID, IS_LOCK, 
+      API_PATH)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{poundageType,jdbcType=TINYINT}, 
+      #{poundageAmount,jdbcType=DECIMAL}, #{sortId,jdbcType=INTEGER}, #{isLock,jdbcType=TINYINT}, 
+      #{apiPath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hn.dls.entity.Payment" >
+    insert into dls_payment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="imgUrl != null" >
+        IMG_URL,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="poundageType != null" >
+        POUNDAGE_TYPE,
+      </if>
+      <if test="poundageAmount != null" >
+        POUNDAGE_AMOUNT,
+      </if>
+      <if test="sortId != null" >
+        SORT_ID,
+      </if>
+      <if test="isLock != null" >
+        IS_LOCK,
+      </if>
+      <if test="apiPath != null" >
+        API_PATH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="poundageType != null" >
+        #{poundageType,jdbcType=TINYINT},
+      </if>
+      <if test="poundageAmount != null" >
+        #{poundageAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="sortId != null" >
+        #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="isLock != null" >
+        #{isLock,jdbcType=TINYINT},
+      </if>
+      <if test="apiPath != null" >
+        #{apiPath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hn.dls.entity.Payment" >
+    update dls_payment
+    <set >
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrl != null" >
+        IMG_URL = #{imgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="poundageType != null" >
+        POUNDAGE_TYPE = #{poundageType,jdbcType=TINYINT},
+      </if>
+      <if test="poundageAmount != null" >
+        POUNDAGE_AMOUNT = #{poundageAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="sortId != null" >
+        SORT_ID = #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="isLock != null" >
+        IS_LOCK = #{isLock,jdbcType=TINYINT},
+      </if>
+      <if test="apiPath != null" >
+        API_PATH = #{apiPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.Payment" >
+    update dls_payment
+    set TITLE = #{title,jdbcType=VARCHAR},
+      IMG_URL = #{imgUrl,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=TINYINT},
+      POUNDAGE_TYPE = #{poundageType,jdbcType=TINYINT},
+      POUNDAGE_AMOUNT = #{poundageAmount,jdbcType=DECIMAL},
+      SORT_ID = #{sortId,jdbcType=INTEGER},
+      IS_LOCK = #{isLock,jdbcType=TINYINT},
+      API_PATH = #{apiPath,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

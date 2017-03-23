@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="OrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.hn.dls.entity.Orders" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR" />
+    <result column="TRADE_NO" property="tradeNo" jdbcType="VARCHAR" />
+    <result column="FK_USER_ID" property="fkUserId" jdbcType="VARCHAR" />
+    <result column="FK_USER_NAME" property="fkUserName" jdbcType="VARCHAR" />
+    <result column="KF_PAYMENT_ID" property="kfPaymentId" jdbcType="INTEGER" />
+    <result column="PAYMENT_FEE" property="paymentFee" jdbcType="DECIMAL" />
+    <result column="PAYMENT_STATUS" property="paymentStatus" jdbcType="TINYINT" />
+    <result column="PAYMENT_TIME" property="paymentTime" jdbcType="TIMESTAMP" />
+    <result column="TELPHONE" property="telphone" jdbcType="VARCHAR" />
+    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="PAYABLE_AMOUNT" property="payableAmount" jdbcType="DECIMAL" />
+    <result column="REAL_AMOUNT" property="realAmount" jdbcType="DECIMAL" />
+    <result column="ORDER_AMOUNT" property="orderAmount" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="TINYINT" />
+    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="CONFIRM_TIME" property="confirmTime" jdbcType="TIMESTAMP" />
+    <result column="COMPLETE_TIME" property="completeTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ORDER_NO, TRADE_NO, FK_USER_ID, FK_USER_NAME, KF_PAYMENT_ID, PAYMENT_FEE, PAYMENT_STATUS, 
+    PAYMENT_TIME, TELPHONE, MOBILE, EMAIL, ADDRESS, REMARK, PAYABLE_AMOUNT, REAL_AMOUNT, 
+    ORDER_AMOUNT, STATUS, ADD_TIME, CONFIRM_TIME, COMPLETE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from dls_orders
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dls_orders
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hn.dls.entity.Orders" >
+    insert into dls_orders (ID, ORDER_NO, TRADE_NO, 
+      FK_USER_ID, FK_USER_NAME, KF_PAYMENT_ID, 
+      PAYMENT_FEE, PAYMENT_STATUS, PAYMENT_TIME, 
+      TELPHONE, MOBILE, EMAIL, 
+      ADDRESS, REMARK, PAYABLE_AMOUNT, 
+      REAL_AMOUNT, ORDER_AMOUNT, STATUS, 
+      ADD_TIME, CONFIRM_TIME, COMPLETE_TIME
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{tradeNo,jdbcType=VARCHAR}, 
+      #{fkUserId,jdbcType=VARCHAR}, #{fkUserName,jdbcType=VARCHAR}, #{kfPaymentId,jdbcType=INTEGER}, 
+      #{paymentFee,jdbcType=DECIMAL}, #{paymentStatus,jdbcType=TINYINT}, #{paymentTime,jdbcType=TIMESTAMP}, 
+      #{telphone,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{payableAmount,jdbcType=DECIMAL}, 
+      #{realAmount,jdbcType=DECIMAL}, #{orderAmount,jdbcType=DECIMAL}, #{status,jdbcType=TINYINT}, 
+      #{addTime,jdbcType=TIMESTAMP}, #{confirmTime,jdbcType=TIMESTAMP}, #{completeTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hn.dls.entity.Orders" >
+    insert into dls_orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO,
+      </if>
+      <if test="tradeNo != null" >
+        TRADE_NO,
+      </if>
+      <if test="fkUserId != null" >
+        FK_USER_ID,
+      </if>
+      <if test="fkUserName != null" >
+        FK_USER_NAME,
+      </if>
+      <if test="kfPaymentId != null" >
+        KF_PAYMENT_ID,
+      </if>
+      <if test="paymentFee != null" >
+        PAYMENT_FEE,
+      </if>
+      <if test="paymentStatus != null" >
+        PAYMENT_STATUS,
+      </if>
+      <if test="paymentTime != null" >
+        PAYMENT_TIME,
+      </if>
+      <if test="telphone != null" >
+        TELPHONE,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="payableAmount != null" >
+        PAYABLE_AMOUNT,
+      </if>
+      <if test="realAmount != null" >
+        REAL_AMOUNT,
+      </if>
+      <if test="orderAmount != null" >
+        ORDER_AMOUNT,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="confirmTime != null" >
+        CONFIRM_TIME,
+      </if>
+      <if test="completeTime != null" >
+        COMPLETE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null" >
+        #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fkUserId != null" >
+        #{fkUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="fkUserName != null" >
+        #{fkUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="kfPaymentId != null" >
+        #{kfPaymentId,jdbcType=INTEGER},
+      </if>
+      <if test="paymentFee != null" >
+        #{paymentFee,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentStatus != null" >
+        #{paymentStatus,jdbcType=TINYINT},
+      </if>
+      <if test="paymentTime != null" >
+        #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="telphone != null" >
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="payableAmount != null" >
+        #{payableAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="realAmount != null" >
+        #{realAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderAmount != null" >
+        #{orderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="addTime != null" >
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmTime != null" >
+        #{confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="completeTime != null" >
+        #{completeTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hn.dls.entity.Orders" >
+    update dls_orders
+    <set >
+      <if test="orderNo != null" >
+        ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeNo != null" >
+        TRADE_NO = #{tradeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fkUserId != null" >
+        FK_USER_ID = #{fkUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="fkUserName != null" >
+        FK_USER_NAME = #{fkUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="kfPaymentId != null" >
+        KF_PAYMENT_ID = #{kfPaymentId,jdbcType=INTEGER},
+      </if>
+      <if test="paymentFee != null" >
+        PAYMENT_FEE = #{paymentFee,jdbcType=DECIMAL},
+      </if>
+      <if test="paymentStatus != null" >
+        PAYMENT_STATUS = #{paymentStatus,jdbcType=TINYINT},
+      </if>
+      <if test="paymentTime != null" >
+        PAYMENT_TIME = #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="telphone != null" >
+        TELPHONE = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="payableAmount != null" >
+        PAYABLE_AMOUNT = #{payableAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="realAmount != null" >
+        REAL_AMOUNT = #{realAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderAmount != null" >
+        ORDER_AMOUNT = #{orderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="confirmTime != null" >
+        CONFIRM_TIME = #{confirmTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="completeTime != null" >
+        COMPLETE_TIME = #{completeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.Orders" >
+    update dls_orders
+    set ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      TRADE_NO = #{tradeNo,jdbcType=VARCHAR},
+      FK_USER_ID = #{fkUserId,jdbcType=VARCHAR},
+      FK_USER_NAME = #{fkUserName,jdbcType=VARCHAR},
+      KF_PAYMENT_ID = #{kfPaymentId,jdbcType=INTEGER},
+      PAYMENT_FEE = #{paymentFee,jdbcType=DECIMAL},
+      PAYMENT_STATUS = #{paymentStatus,jdbcType=TINYINT},
+      PAYMENT_TIME = #{paymentTime,jdbcType=TIMESTAMP},
+      TELPHONE = #{telphone,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      PAYABLE_AMOUNT = #{payableAmount,jdbcType=DECIMAL},
+      REAL_AMOUNT = #{realAmount,jdbcType=DECIMAL},
+      ORDER_AMOUNT = #{orderAmount,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=TINYINT},
+      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+      CONFIRM_TIME = #{confirmTime,jdbcType=TIMESTAMP},
+      COMPLETE_TIME = #{completeTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

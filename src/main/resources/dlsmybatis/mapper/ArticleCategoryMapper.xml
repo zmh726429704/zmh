@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ArticleCategoryMapper" >
+  <resultMap id="BaseResultMap" type="com.hn.dls.entity.ArticleCategory" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="FK_CHANNEL_ID" property="fkChannelId" jdbcType="INTEGER" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="SEO_TITLE" property="seoTitle" jdbcType="VARCHAR" />
+    <result column="SEO_KEYWORDS" property="seoKeywords" jdbcType="VARCHAR" />
+    <result column="SEO_DESCRIPTION" property="seoDescription" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="INTEGER" />
+    <result column="CLASS_LIST" property="classList" jdbcType="VARCHAR" />
+    <result column="CLASS_LAYER" property="classLayer" jdbcType="INTEGER" />
+    <result column="SORT_ID" property="sortId" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hn.dls.entity.ArticleCategory" extends="BaseResultMap" >
+    <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, FK_CHANNEL_ID, TITLE, SEO_TITLE, SEO_KEYWORDS, SEO_DESCRIPTION, PARENT_ID, CLASS_LIST, 
+    CLASS_LAYER, SORT_ID
+  </sql>
+  <sql id="Blob_Column_List" >
+    CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dls_article_category
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dls_article_category
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hn.dls.entity.ArticleCategory" >
+    insert into dls_article_category (ID, FK_CHANNEL_ID, TITLE, 
+      SEO_TITLE, SEO_KEYWORDS, SEO_DESCRIPTION, 
+      PARENT_ID, CLASS_LIST, CLASS_LAYER, 
+      SORT_ID, CONTENT)
+    values (#{id,jdbcType=INTEGER}, #{fkChannelId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{seoTitle,jdbcType=VARCHAR}, #{seoKeywords,jdbcType=VARCHAR}, #{seoDescription,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=INTEGER}, #{classList,jdbcType=VARCHAR}, #{classLayer,jdbcType=INTEGER}, 
+      #{sortId,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hn.dls.entity.ArticleCategory" >
+    insert into dls_article_category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="fkChannelId != null" >
+        FK_CHANNEL_ID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="seoTitle != null" >
+        SEO_TITLE,
+      </if>
+      <if test="seoKeywords != null" >
+        SEO_KEYWORDS,
+      </if>
+      <if test="seoDescription != null" >
+        SEO_DESCRIPTION,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="classList != null" >
+        CLASS_LIST,
+      </if>
+      <if test="classLayer != null" >
+        CLASS_LAYER,
+      </if>
+      <if test="sortId != null" >
+        SORT_ID,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fkChannelId != null" >
+        #{fkChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="seoTitle != null" >
+        #{seoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="seoKeywords != null" >
+        #{seoKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="seoDescription != null" >
+        #{seoDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="classList != null" >
+        #{classList,jdbcType=VARCHAR},
+      </if>
+      <if test="classLayer != null" >
+        #{classLayer,jdbcType=INTEGER},
+      </if>
+      <if test="sortId != null" >
+        #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hn.dls.entity.ArticleCategory" >
+    update dls_article_category
+    <set >
+      <if test="fkChannelId != null" >
+        FK_CHANNEL_ID = #{fkChannelId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="seoTitle != null" >
+        SEO_TITLE = #{seoTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="seoKeywords != null" >
+        SEO_KEYWORDS = #{seoKeywords,jdbcType=VARCHAR},
+      </if>
+      <if test="seoDescription != null" >
+        SEO_DESCRIPTION = #{seoDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="classList != null" >
+        CLASS_LIST = #{classList,jdbcType=VARCHAR},
+      </if>
+      <if test="classLayer != null" >
+        CLASS_LAYER = #{classLayer,jdbcType=INTEGER},
+      </if>
+      <if test="sortId != null" >
+        SORT_ID = #{sortId,jdbcType=INTEGER},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hn.dls.entity.ArticleCategory" >
+    update dls_article_category
+    set FK_CHANNEL_ID = #{fkChannelId,jdbcType=INTEGER},
+      TITLE = #{title,jdbcType=VARCHAR},
+      SEO_TITLE = #{seoTitle,jdbcType=VARCHAR},
+      SEO_KEYWORDS = #{seoKeywords,jdbcType=VARCHAR},
+      SEO_DESCRIPTION = #{seoDescription,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=INTEGER},
+      CLASS_LIST = #{classList,jdbcType=VARCHAR},
+      CLASS_LAYER = #{classLayer,jdbcType=INTEGER},
+      SORT_ID = #{sortId,jdbcType=INTEGER},
+      CONTENT = #{content,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.ArticleCategory" >
+    update dls_article_category
+    set FK_CHANNEL_ID = #{fkChannelId,jdbcType=INTEGER},
+      TITLE = #{title,jdbcType=VARCHAR},
+      SEO_TITLE = #{seoTitle,jdbcType=VARCHAR},
+      SEO_KEYWORDS = #{seoKeywords,jdbcType=VARCHAR},
+      SEO_DESCRIPTION = #{seoDescription,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=INTEGER},
+      CLASS_LIST = #{classList,jdbcType=VARCHAR},
+      CLASS_LAYER = #{classLayer,jdbcType=INTEGER},
+      SORT_ID = #{sortId,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="RequirementFormMapper" >
+  <resultMap id="BaseResultMap" type="com.hn.dls.entity.RequirementForm" >
+    <id column="FORM_ID" property="formId" jdbcType="INTEGER" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="BUDGET" property="budget" jdbcType="DOUBLE" />
+    <result column="IS_FIELD_SERVICE" property="isFieldService" jdbcType="CHAR" />
+    <result column="CYCLE" property="cycle" jdbcType="CHAR" />
+    <result column="DEAD_DATE" property="deadDate" jdbcType="DATE" />
+    <result column="CITY" property="city" jdbcType="VARCHAR" />
+    <result column="PUBLISHER" property="publisher" jdbcType="INTEGER" />
+    <result column="CREAT_TIME" property="creatTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hn.dls.entity.RequirementForm" extends="BaseResultMap" >
+    <result column="DESCRIPTION" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FORM_ID, NAME, BUDGET, IS_FIELD_SERVICE, CYCLE, DEAD_DATE, CITY, PUBLISHER, CREAT_TIME, 
+    MODIFY_TIME
+  </sql>
+  <sql id="Blob_Column_List" >
+    DESCRIPTION
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dls_requirement_form
+    where FORM_ID = #{formId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dls_requirement_form
+    where FORM_ID = #{formId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hn.dls.entity.RequirementForm" >
+    insert into dls_requirement_form (FORM_ID, NAME, BUDGET, 
+      IS_FIELD_SERVICE, CYCLE, DEAD_DATE, 
+      CITY, PUBLISHER, CREAT_TIME, 
+      MODIFY_TIME, DESCRIPTION)
+    values (#{formId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{budget,jdbcType=DOUBLE}, 
+      #{isFieldService,jdbcType=CHAR}, #{cycle,jdbcType=CHAR}, #{deadDate,jdbcType=DATE}, 
+      #{city,jdbcType=VARCHAR}, #{publisher,jdbcType=INTEGER}, #{creatTime,jdbcType=TIMESTAMP}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hn.dls.entity.RequirementForm" >
+    insert into dls_requirement_form
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="formId != null" >
+        FORM_ID,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="budget != null" >
+        BUDGET,
+      </if>
+      <if test="isFieldService != null" >
+        IS_FIELD_SERVICE,
+      </if>
+      <if test="cycle != null" >
+        CYCLE,
+      </if>
+      <if test="deadDate != null" >
+        DEAD_DATE,
+      </if>
+      <if test="city != null" >
+        CITY,
+      </if>
+      <if test="publisher != null" >
+        PUBLISHER,
+      </if>
+      <if test="creatTime != null" >
+        CREAT_TIME,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="formId != null" >
+        #{formId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="budget != null" >
+        #{budget,jdbcType=DOUBLE},
+      </if>
+      <if test="isFieldService != null" >
+        #{isFieldService,jdbcType=CHAR},
+      </if>
+      <if test="cycle != null" >
+        #{cycle,jdbcType=CHAR},
+      </if>
+      <if test="deadDate != null" >
+        #{deadDate,jdbcType=DATE},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null" >
+        #{publisher,jdbcType=INTEGER},
+      </if>
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hn.dls.entity.RequirementForm" >
+    update dls_requirement_form
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="budget != null" >
+        BUDGET = #{budget,jdbcType=DOUBLE},
+      </if>
+      <if test="isFieldService != null" >
+        IS_FIELD_SERVICE = #{isFieldService,jdbcType=CHAR},
+      </if>
+      <if test="cycle != null" >
+        CYCLE = #{cycle,jdbcType=CHAR},
+      </if>
+      <if test="deadDate != null" >
+        DEAD_DATE = #{deadDate,jdbcType=DATE},
+      </if>
+      <if test="city != null" >
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="publisher != null" >
+        PUBLISHER = #{publisher,jdbcType=INTEGER},
+      </if>
+      <if test="creatTime != null" >
+        CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where FORM_ID = #{formId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hn.dls.entity.RequirementForm" >
+    update dls_requirement_form
+    set NAME = #{name,jdbcType=VARCHAR},
+      BUDGET = #{budget,jdbcType=DOUBLE},
+      IS_FIELD_SERVICE = #{isFieldService,jdbcType=CHAR},
+      CYCLE = #{cycle,jdbcType=CHAR},
+      DEAD_DATE = #{deadDate,jdbcType=DATE},
+      CITY = #{city,jdbcType=VARCHAR},
+      PUBLISHER = #{publisher,jdbcType=INTEGER},
+      CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP},
+      MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+      DESCRIPTION = #{description,jdbcType=LONGVARCHAR}
+    where FORM_ID = #{formId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.RequirementForm" >
+    update dls_requirement_form
+    set NAME = #{name,jdbcType=VARCHAR},
+      BUDGET = #{budget,jdbcType=DOUBLE},
+      IS_FIELD_SERVICE = #{isFieldService,jdbcType=CHAR},
+      CYCLE = #{cycle,jdbcType=CHAR},
+      DEAD_DATE = #{deadDate,jdbcType=DATE},
+      CITY = #{city,jdbcType=VARCHAR},
+      PUBLISHER = #{publisher,jdbcType=INTEGER},
+      CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP},
+      MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP}
+    where FORM_ID = #{formId,jdbcType=INTEGER}
+  </update>
+</mapper>
