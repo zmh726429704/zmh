@@ -66,6 +66,19 @@ public class DlsUserController {
 		jsonObject.put("result", result);
 		return jsonObject;
 	}
+	
+	/**
+	 * 退出登录
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "logout")
+	@ResponseBody
+	public void logout(HttpServletRequest request, HttpServletResponse response){
+		HttpSession session =request.getSession();
+		session.removeAttribute("loginUser");
+	}
 
 	/**
 	 * 修改密码
