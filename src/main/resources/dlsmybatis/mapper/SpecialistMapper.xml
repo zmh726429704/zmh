@@ -1,402 +1,421 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="SpecialistMapper" >
-  <resultMap id="BaseResultMap" type="com.hn.dls.entity.Specialist" >
-    <id column="ID" property="id" jdbcType="INTEGER" />
-    <result column="SPECIALIST_NAME" property="specialistName" jdbcType="VARCHAR" />
-    <result column="SPECIAL_CODE" property="specialCode" jdbcType="VARCHAR" />
-    <result column="PRICE" property="price" jdbcType="DECIMAL" />
-    <result column="INDUSTRY" property="industry" jdbcType="INTEGER" />
-    <result column="SPECIALTY" property="specialty" jdbcType="INTEGER" />
-    <result column="JOB_DES" property="jobDes" jdbcType="VARCHAR" />
-    <result column="HEAD_PIC" property="headPic" jdbcType="VARCHAR" />
-    <result column="PIC" property="pic" jdbcType="VARCHAR" />
-    <result column="PROVINCE" property="province" jdbcType="INTEGER" />
-    <result column="RESPOND_TIME" property="respondTime" jdbcType="VARCHAR" />
-    <result column="MEET_NUMBER" property="meetNumber" jdbcType="INTEGER" />
-    <result column="LIKE_NUMBER" property="likeNumber" jdbcType="INTEGER" />
-    <result column="APPOINTMENT" property="appointment" jdbcType="INTEGER" />
-    <result column="STATUS" property="status" jdbcType="CHAR" />
-    <result column="NATION" property="nation" jdbcType="INTEGER" />
-    <result column="DANGDI" property="dangdi" jdbcType="CHAR" />
-    <result column="SERVICE_ID" property="serviceId" jdbcType="INTEGER" />
-    <result column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
-    <result column="JOB_ATTACH" property="jobAttach" jdbcType="VARCHAR" />
-    <result column="ATTACH" property="attach" jdbcType="VARCHAR" />
-    <result column="HIRE_SYLE" property="hireSyle" jdbcType="INTEGER" />
-    <result column="CANTACT_WAY" property="cantactWay" jdbcType="INTEGER" />
-    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
-    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
-    <result column="IP_ADDRESS" property="ipAddress" jdbcType="VARCHAR" />
-    <result column="PUBLISHER" property="publisher" jdbcType="INTEGER" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.hn.dls.entity.Specialist" extends="BaseResultMap" >
-    <result column="SPECIALIST_DES" property="specialistDes" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    ID, SPECIALIST_NAME, SPECIAL_CODE, PRICE, INDUSTRY, SPECIALTY, JOB_DES, HEAD_PIC, 
-    PIC, PROVINCE, RESPOND_TIME, MEET_NUMBER, LIKE_NUMBER, APPOINTMENT, STATUS, NATION, 
-    DANGDI, SERVICE_ID, ROLE_ID, JOB_ATTACH, ATTACH, HIRE_SYLE, CANTACT_WAY, ADD_TIME, 
-    UPDATE_TIME, IP_ADDRESS, PUBLISHER
-  </sql>
-  <sql id="Blob_Column_List" >
-    SPECIALIST_DES
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from dls_specialist
-    where ID = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from dls_specialist
-    where ID = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.hn.dls.entity.Specialist" >
-    insert into dls_specialist (ID, SPECIALIST_NAME, SPECIAL_CODE, 
-      PRICE, INDUSTRY, SPECIALTY, 
-      JOB_DES, HEAD_PIC, PIC, 
-      PROVINCE, RESPOND_TIME, MEET_NUMBER, 
-      LIKE_NUMBER, APPOINTMENT, STATUS, 
-      NATION, DANGDI, SERVICE_ID, 
-      ROLE_ID, JOB_ATTACH, ATTACH, 
-      HIRE_SYLE, CANTACT_WAY, ADD_TIME, 
-      UPDATE_TIME, IP_ADDRESS, PUBLISHER, 
-      SPECIALIST_DES)
-    values (#{id,jdbcType=INTEGER}, #{specialistName,jdbcType=VARCHAR}, #{specialCode,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{industry,jdbcType=INTEGER}, #{specialty,jdbcType=INTEGER}, 
-      #{jobDes,jdbcType=VARCHAR}, #{headPic,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, 
-      #{province,jdbcType=INTEGER}, #{respondTime,jdbcType=VARCHAR}, #{meetNumber,jdbcType=INTEGER}, 
-      #{likeNumber,jdbcType=INTEGER}, #{appointment,jdbcType=INTEGER}, #{status,jdbcType=CHAR}, 
-      #{nation,jdbcType=INTEGER}, #{dangdi,jdbcType=CHAR}, #{serviceId,jdbcType=INTEGER}, 
-      #{roleId,jdbcType=INTEGER}, #{jobAttach,jdbcType=VARCHAR}, #{attach,jdbcType=VARCHAR}, 
-      #{hireSyle,jdbcType=INTEGER}, #{cantactWay,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{ipAddress,jdbcType=VARCHAR}, #{publisher,jdbcType=INTEGER}, 
-      #{specialistDes,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.hn.dls.entity.Specialist" >
-    insert into dls_specialist
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        ID,
-      </if>
-      <if test="specialistName != null" >
-        SPECIALIST_NAME,
-      </if>
-      <if test="specialCode != null" >
-        SPECIAL_CODE,
-      </if>
-      <if test="price != null" >
-        PRICE,
-      </if>
-      <if test="industry != null" >
-        INDUSTRY,
-      </if>
-      <if test="specialty != null" >
-        SPECIALTY,
-      </if>
-      <if test="jobDes != null" >
-        JOB_DES,
-      </if>
-      <if test="headPic != null" >
-        HEAD_PIC,
-      </if>
-      <if test="pic != null" >
-        PIC,
-      </if>
-      <if test="province != null" >
-        PROVINCE,
-      </if>
-      <if test="respondTime != null" >
-        RESPOND_TIME,
-      </if>
-      <if test="meetNumber != null" >
-        MEET_NUMBER,
-      </if>
-      <if test="likeNumber != null" >
-        LIKE_NUMBER,
-      </if>
-      <if test="appointment != null" >
-        APPOINTMENT,
-      </if>
-      <if test="status != null" >
-        STATUS,
-      </if>
-      <if test="nation != null" >
-        NATION,
-      </if>
-      <if test="dangdi != null" >
-        DANGDI,
-      </if>
-      <if test="serviceId != null" >
-        SERVICE_ID,
-      </if>
-      <if test="roleId != null" >
-        ROLE_ID,
-      </if>
-      <if test="jobAttach != null" >
-        JOB_ATTACH,
-      </if>
-      <if test="attach != null" >
-        ATTACH,
-      </if>
-      <if test="hireSyle != null" >
-        HIRE_SYLE,
-      </if>
-      <if test="cantactWay != null" >
-        CANTACT_WAY,
-      </if>
-      <if test="addTime != null" >
-        ADD_TIME,
-      </if>
-      <if test="updateTime != null" >
-        UPDATE_TIME,
-      </if>
-      <if test="ipAddress != null" >
-        IP_ADDRESS,
-      </if>
-      <if test="publisher != null" >
-        PUBLISHER,
-      </if>
-      <if test="specialistDes != null" >
-        SPECIALIST_DES,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="specialistName != null" >
-        #{specialistName,jdbcType=VARCHAR},
-      </if>
-      <if test="specialCode != null" >
-        #{specialCode,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="industry != null" >
-        #{industry,jdbcType=INTEGER},
-      </if>
-      <if test="specialty != null" >
-        #{specialty,jdbcType=INTEGER},
-      </if>
-      <if test="jobDes != null" >
-        #{jobDes,jdbcType=VARCHAR},
-      </if>
-      <if test="headPic != null" >
-        #{headPic,jdbcType=VARCHAR},
-      </if>
-      <if test="pic != null" >
-        #{pic,jdbcType=VARCHAR},
-      </if>
-      <if test="province != null" >
-        #{province,jdbcType=INTEGER},
-      </if>
-      <if test="respondTime != null" >
-        #{respondTime,jdbcType=VARCHAR},
-      </if>
-      <if test="meetNumber != null" >
-        #{meetNumber,jdbcType=INTEGER},
-      </if>
-      <if test="likeNumber != null" >
-        #{likeNumber,jdbcType=INTEGER},
-      </if>
-      <if test="appointment != null" >
-        #{appointment,jdbcType=INTEGER},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=CHAR},
-      </if>
-      <if test="nation != null" >
-        #{nation,jdbcType=INTEGER},
-      </if>
-      <if test="dangdi != null" >
-        #{dangdi,jdbcType=CHAR},
-      </if>
-      <if test="serviceId != null" >
-        #{serviceId,jdbcType=INTEGER},
-      </if>
-      <if test="roleId != null" >
-        #{roleId,jdbcType=INTEGER},
-      </if>
-      <if test="jobAttach != null" >
-        #{jobAttach,jdbcType=VARCHAR},
-      </if>
-      <if test="attach != null" >
-        #{attach,jdbcType=VARCHAR},
-      </if>
-      <if test="hireSyle != null" >
-        #{hireSyle,jdbcType=INTEGER},
-      </if>
-      <if test="cantactWay != null" >
-        #{cantactWay,jdbcType=INTEGER},
-      </if>
-      <if test="addTime != null" >
-        #{addTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="ipAddress != null" >
-        #{ipAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="publisher != null" >
-        #{publisher,jdbcType=INTEGER},
-      </if>
-      <if test="specialistDes != null" >
-        #{specialistDes,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hn.dls.entity.Specialist" >
-    update dls_specialist
-    <set >
-      <if test="specialistName != null" >
-        SPECIALIST_NAME = #{specialistName,jdbcType=VARCHAR},
-      </if>
-      <if test="specialCode != null" >
-        SPECIAL_CODE = #{specialCode,jdbcType=VARCHAR},
-      </if>
-      <if test="price != null" >
-        PRICE = #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="industry != null" >
-        INDUSTRY = #{industry,jdbcType=INTEGER},
-      </if>
-      <if test="specialty != null" >
-        SPECIALTY = #{specialty,jdbcType=INTEGER},
-      </if>
-      <if test="jobDes != null" >
-        JOB_DES = #{jobDes,jdbcType=VARCHAR},
-      </if>
-      <if test="headPic != null" >
-        HEAD_PIC = #{headPic,jdbcType=VARCHAR},
-      </if>
-      <if test="pic != null" >
-        PIC = #{pic,jdbcType=VARCHAR},
-      </if>
-      <if test="province != null" >
-        PROVINCE = #{province,jdbcType=INTEGER},
-      </if>
-      <if test="respondTime != null" >
-        RESPOND_TIME = #{respondTime,jdbcType=VARCHAR},
-      </if>
-      <if test="meetNumber != null" >
-        MEET_NUMBER = #{meetNumber,jdbcType=INTEGER},
-      </if>
-      <if test="likeNumber != null" >
-        LIKE_NUMBER = #{likeNumber,jdbcType=INTEGER},
-      </if>
-      <if test="appointment != null" >
-        APPOINTMENT = #{appointment,jdbcType=INTEGER},
-      </if>
-      <if test="status != null" >
-        STATUS = #{status,jdbcType=CHAR},
-      </if>
-      <if test="nation != null" >
-        NATION = #{nation,jdbcType=INTEGER},
-      </if>
-      <if test="dangdi != null" >
-        DANGDI = #{dangdi,jdbcType=CHAR},
-      </if>
-      <if test="serviceId != null" >
-        SERVICE_ID = #{serviceId,jdbcType=INTEGER},
-      </if>
-      <if test="roleId != null" >
-        ROLE_ID = #{roleId,jdbcType=INTEGER},
-      </if>
-      <if test="jobAttach != null" >
-        JOB_ATTACH = #{jobAttach,jdbcType=VARCHAR},
-      </if>
-      <if test="attach != null" >
-        ATTACH = #{attach,jdbcType=VARCHAR},
-      </if>
-      <if test="hireSyle != null" >
-        HIRE_SYLE = #{hireSyle,jdbcType=INTEGER},
-      </if>
-      <if test="cantactWay != null" >
-        CANTACT_WAY = #{cantactWay,jdbcType=INTEGER},
-      </if>
-      <if test="addTime != null" >
-        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="ipAddress != null" >
-        IP_ADDRESS = #{ipAddress,jdbcType=VARCHAR},
-      </if>
-      <if test="publisher != null" >
-        PUBLISHER = #{publisher,jdbcType=INTEGER},
-      </if>
-      <if test="specialistDes != null" >
-        SPECIALIST_DES = #{specialistDes,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hn.dls.entity.Specialist" >
-    update dls_specialist
-    set SPECIALIST_NAME = #{specialistName,jdbcType=VARCHAR},
-      SPECIAL_CODE = #{specialCode,jdbcType=VARCHAR},
-      PRICE = #{price,jdbcType=DECIMAL},
-      INDUSTRY = #{industry,jdbcType=INTEGER},
-      SPECIALTY = #{specialty,jdbcType=INTEGER},
-      JOB_DES = #{jobDes,jdbcType=VARCHAR},
-      HEAD_PIC = #{headPic,jdbcType=VARCHAR},
-      PIC = #{pic,jdbcType=VARCHAR},
-      PROVINCE = #{province,jdbcType=INTEGER},
-      RESPOND_TIME = #{respondTime,jdbcType=VARCHAR},
-      MEET_NUMBER = #{meetNumber,jdbcType=INTEGER},
-      LIKE_NUMBER = #{likeNumber,jdbcType=INTEGER},
-      APPOINTMENT = #{appointment,jdbcType=INTEGER},
-      STATUS = #{status,jdbcType=CHAR},
-      NATION = #{nation,jdbcType=INTEGER},
-      DANGDI = #{dangdi,jdbcType=CHAR},
-      SERVICE_ID = #{serviceId,jdbcType=INTEGER},
-      ROLE_ID = #{roleId,jdbcType=INTEGER},
-      JOB_ATTACH = #{jobAttach,jdbcType=VARCHAR},
-      ATTACH = #{attach,jdbcType=VARCHAR},
-      HIRE_SYLE = #{hireSyle,jdbcType=INTEGER},
-      CANTACT_WAY = #{cantactWay,jdbcType=INTEGER},
-      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
-      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-      IP_ADDRESS = #{ipAddress,jdbcType=VARCHAR},
-      PUBLISHER = #{publisher,jdbcType=INTEGER},
-      SPECIALIST_DES = #{specialistDes,jdbcType=LONGVARCHAR}
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.Specialist" >
-    update dls_specialist
-    set SPECIALIST_NAME = #{specialistName,jdbcType=VARCHAR},
-      SPECIAL_CODE = #{specialCode,jdbcType=VARCHAR},
-      PRICE = #{price,jdbcType=DECIMAL},
-      INDUSTRY = #{industry,jdbcType=INTEGER},
-      SPECIALTY = #{specialty,jdbcType=INTEGER},
-      JOB_DES = #{jobDes,jdbcType=VARCHAR},
-      HEAD_PIC = #{headPic,jdbcType=VARCHAR},
-      PIC = #{pic,jdbcType=VARCHAR},
-      PROVINCE = #{province,jdbcType=INTEGER},
-      RESPOND_TIME = #{respondTime,jdbcType=VARCHAR},
-      MEET_NUMBER = #{meetNumber,jdbcType=INTEGER},
-      LIKE_NUMBER = #{likeNumber,jdbcType=INTEGER},
-      APPOINTMENT = #{appointment,jdbcType=INTEGER},
-      STATUS = #{status,jdbcType=CHAR},
-      NATION = #{nation,jdbcType=INTEGER},
-      DANGDI = #{dangdi,jdbcType=CHAR},
-      SERVICE_ID = #{serviceId,jdbcType=INTEGER},
-      ROLE_ID = #{roleId,jdbcType=INTEGER},
-      JOB_ATTACH = #{jobAttach,jdbcType=VARCHAR},
-      ATTACH = #{attach,jdbcType=VARCHAR},
-      HIRE_SYLE = #{hireSyle,jdbcType=INTEGER},
-      CANTACT_WAY = #{cantactWay,jdbcType=INTEGER},
-      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
-      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-      IP_ADDRESS = #{ipAddress,jdbcType=VARCHAR},
-      PUBLISHER = #{publisher,jdbcType=INTEGER}
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="SpecialistMapper">
+	<resultMap id="BaseResultMap" type="com.hn.dls.entity.Specialist">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="SPECIALIST_NAME" property="specialistName"
+			jdbcType="VARCHAR" />
+		<result column="SPECIAL_CODE" property="specialCode" jdbcType="VARCHAR" />
+		<result column="PRICE" property="price" jdbcType="DECIMAL" />
+		<result column="INDUSTRY" property="industry" jdbcType="INTEGER" />
+		<result column="SPECIALTY" property="specialty" jdbcType="INTEGER" />
+		<result column="JOB_DES" property="jobDes" jdbcType="VARCHAR" />
+		<result column="HEAD_PIC" property="headPic" jdbcType="VARCHAR" />
+		<result column="PIC" property="pic" jdbcType="VARCHAR" />
+		<result column="PROVINCE" property="province" jdbcType="INTEGER" />
+		<result column="RESPOND_TIME" property="respondTime" jdbcType="VARCHAR" />
+		<result column="MEET_NUMBER" property="meetNumber" jdbcType="INTEGER" />
+		<result column="LIKE_NUMBER" property="likeNumber" jdbcType="INTEGER" />
+		<result column="APPOINTMENT" property="appointment" jdbcType="INTEGER" />
+		<result column="STATUS" property="status" jdbcType="CHAR" />
+		<result column="NATION" property="nation" jdbcType="INTEGER" />
+		<result column="DANGDI" property="dangdi" jdbcType="CHAR" />
+		<result column="SERVICE_ID" property="serviceId" jdbcType="INTEGER" />
+		<result column="ROLE_ID" property="roleId" jdbcType="INTEGER" />
+		<result column="JOB_ATTACH" property="jobAttach" jdbcType="VARCHAR" />
+		<result column="ATTACH" property="attach" jdbcType="VARCHAR" />
+		<result column="HIRE_SYLE" property="hireSyle" jdbcType="INTEGER" />
+		<result column="CANTACT_WAY" property="cantactWay" jdbcType="INTEGER" />
+		<result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="IP_ADDRESS" property="ipAddress" jdbcType="VARCHAR" />
+		<result column="PUBLISHER" property="publisher" jdbcType="INTEGER" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.hn.dls.entity.Specialist"
+		extends="BaseResultMap">
+		<result column="SPECIALIST_DES" property="specialistDes"
+			jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, SPECIALIST_NAME, SPECIAL_CODE, PRICE, INDUSTRY, SPECIALTY, JOB_DES,
+		HEAD_PIC,
+		PIC, PROVINCE, RESPOND_TIME, MEET_NUMBER, LIKE_NUMBER, APPOINTMENT,
+		STATUS, NATION,
+		DANGDI, SERVICE_ID, ROLE_ID, JOB_ATTACH, ATTACH, HIRE_SYLE, CANTACT_WAY,
+		ADD_TIME,
+		UPDATE_TIME, IP_ADDRESS, PUBLISHER
+	</sql>
+	<sql id="Blob_Column_List">
+		SPECIALIST_DES
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from dls_specialist
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from dls_specialist
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.hn.dls.entity.Specialist">
+		insert into dls_specialist (ID, SPECIALIST_NAME, SPECIAL_CODE,
+		PRICE, INDUSTRY, SPECIALTY,
+		JOB_DES, HEAD_PIC, PIC,
+		PROVINCE, RESPOND_TIME, MEET_NUMBER,
+		LIKE_NUMBER, APPOINTMENT, STATUS,
+		NATION, DANGDI, SERVICE_ID,
+		ROLE_ID, JOB_ATTACH, ATTACH,
+		HIRE_SYLE, CANTACT_WAY, ADD_TIME,
+		UPDATE_TIME, IP_ADDRESS, PUBLISHER,
+		SPECIALIST_DES)
+		values (#{id,jdbcType=INTEGER}, #{specialistName,jdbcType=VARCHAR},
+		#{specialCode,jdbcType=VARCHAR},
+		#{price,jdbcType=DECIMAL}, #{industry,jdbcType=INTEGER}, #{specialty,jdbcType=INTEGER},
+		#{jobDes,jdbcType=VARCHAR}, #{headPic,jdbcType=VARCHAR},
+		#{pic,jdbcType=VARCHAR},
+		#{province,jdbcType=INTEGER}, #{respondTime,jdbcType=VARCHAR}, #{meetNumber,jdbcType=INTEGER},
+		#{likeNumber,jdbcType=INTEGER}, #{appointment,jdbcType=INTEGER},
+		#{status,jdbcType=CHAR},
+		#{nation,jdbcType=INTEGER}, #{dangdi,jdbcType=CHAR}, #{serviceId,jdbcType=INTEGER},
+		#{roleId,jdbcType=INTEGER}, #{jobAttach,jdbcType=VARCHAR},
+		#{attach,jdbcType=VARCHAR},
+		#{hireSyle,jdbcType=INTEGER}, #{cantactWay,jdbcType=INTEGER}, #{addTime,jdbcType=TIMESTAMP},
+		#{updateTime,jdbcType=TIMESTAMP}, #{ipAddress,jdbcType=VARCHAR},
+		#{publisher,jdbcType=INTEGER},
+		#{specialistDes,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.hn.dls.entity.Specialist">
+		insert into dls_specialist
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="specialistName != null">
+				SPECIALIST_NAME,
+			</if>
+			<if test="specialCode != null">
+				SPECIAL_CODE,
+			</if>
+			<if test="price != null">
+				PRICE,
+			</if>
+			<if test="industry != null">
+				INDUSTRY,
+			</if>
+			<if test="specialty != null">
+				SPECIALTY,
+			</if>
+			<if test="jobDes != null">
+				JOB_DES,
+			</if>
+			<if test="headPic != null">
+				HEAD_PIC,
+			</if>
+			<if test="pic != null">
+				PIC,
+			</if>
+			<if test="province != null">
+				PROVINCE,
+			</if>
+			<if test="respondTime != null">
+				RESPOND_TIME,
+			</if>
+			<if test="meetNumber != null">
+				MEET_NUMBER,
+			</if>
+			<if test="likeNumber != null">
+				LIKE_NUMBER,
+			</if>
+			<if test="appointment != null">
+				APPOINTMENT,
+			</if>
+			<if test="status != null">
+				STATUS,
+			</if>
+			<if test="nation != null">
+				NATION,
+			</if>
+			<if test="dangdi != null">
+				DANGDI,
+			</if>
+			<if test="serviceId != null">
+				SERVICE_ID,
+			</if>
+			<if test="roleId != null">
+				ROLE_ID,
+			</if>
+			<if test="jobAttach != null">
+				JOB_ATTACH,
+			</if>
+			<if test="attach != null">
+				ATTACH,
+			</if>
+			<if test="hireSyle != null">
+				HIRE_SYLE,
+			</if>
+			<if test="cantactWay != null">
+				CANTACT_WAY,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="ipAddress != null">
+				IP_ADDRESS,
+			</if>
+			<if test="publisher != null">
+				PUBLISHER,
+			</if>
+			<if test="specialistDes != null">
+				SPECIALIST_DES,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="specialistName != null">
+				#{specialistName,jdbcType=VARCHAR},
+			</if>
+			<if test="specialCode != null">
+				#{specialCode,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=DECIMAL},
+			</if>
+			<if test="industry != null">
+				#{industry,jdbcType=INTEGER},
+			</if>
+			<if test="specialty != null">
+				#{specialty,jdbcType=INTEGER},
+			</if>
+			<if test="jobDes != null">
+				#{jobDes,jdbcType=VARCHAR},
+			</if>
+			<if test="headPic != null">
+				#{headPic,jdbcType=VARCHAR},
+			</if>
+			<if test="pic != null">
+				#{pic,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				#{province,jdbcType=INTEGER},
+			</if>
+			<if test="respondTime != null">
+				#{respondTime,jdbcType=VARCHAR},
+			</if>
+			<if test="meetNumber != null">
+				#{meetNumber,jdbcType=INTEGER},
+			</if>
+			<if test="likeNumber != null">
+				#{likeNumber,jdbcType=INTEGER},
+			</if>
+			<if test="appointment != null">
+				#{appointment,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+			<if test="nation != null">
+				#{nation,jdbcType=INTEGER},
+			</if>
+			<if test="dangdi != null">
+				#{dangdi,jdbcType=CHAR},
+			</if>
+			<if test="serviceId != null">
+				#{serviceId,jdbcType=INTEGER},
+			</if>
+			<if test="roleId != null">
+				#{roleId,jdbcType=INTEGER},
+			</if>
+			<if test="jobAttach != null">
+				#{jobAttach,jdbcType=VARCHAR},
+			</if>
+			<if test="attach != null">
+				#{attach,jdbcType=VARCHAR},
+			</if>
+			<if test="hireSyle != null">
+				#{hireSyle,jdbcType=INTEGER},
+			</if>
+			<if test="cantactWay != null">
+				#{cantactWay,jdbcType=INTEGER},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ipAddress != null">
+				#{ipAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="publisher != null">
+				#{publisher,jdbcType=INTEGER},
+			</if>
+			<if test="specialistDes != null">
+				#{specialistDes,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hn.dls.entity.Specialist">
+		update dls_specialist
+		<set>
+			<if test="specialistName != null">
+				SPECIALIST_NAME = #{specialistName,jdbcType=VARCHAR},
+			</if>
+			<if test="specialCode != null">
+				SPECIAL_CODE = #{specialCode,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				PRICE = #{price,jdbcType=DECIMAL},
+			</if>
+			<if test="industry != null">
+				INDUSTRY = #{industry,jdbcType=INTEGER},
+			</if>
+			<if test="specialty != null">
+				SPECIALTY = #{specialty,jdbcType=INTEGER},
+			</if>
+			<if test="jobDes != null">
+				JOB_DES = #{jobDes,jdbcType=VARCHAR},
+			</if>
+			<if test="headPic != null">
+				HEAD_PIC = #{headPic,jdbcType=VARCHAR},
+			</if>
+			<if test="pic != null">
+				PIC = #{pic,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				PROVINCE = #{province,jdbcType=INTEGER},
+			</if>
+			<if test="respondTime != null">
+				RESPOND_TIME = #{respondTime,jdbcType=VARCHAR},
+			</if>
+			<if test="meetNumber != null">
+				MEET_NUMBER = #{meetNumber,jdbcType=INTEGER},
+			</if>
+			<if test="likeNumber != null">
+				LIKE_NUMBER = #{likeNumber,jdbcType=INTEGER},
+			</if>
+			<if test="appointment != null">
+				APPOINTMENT = #{appointment,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=CHAR},
+			</if>
+			<if test="nation != null">
+				NATION = #{nation,jdbcType=INTEGER},
+			</if>
+			<if test="dangdi != null">
+				DANGDI = #{dangdi,jdbcType=CHAR},
+			</if>
+			<if test="serviceId != null">
+				SERVICE_ID = #{serviceId,jdbcType=INTEGER},
+			</if>
+			<if test="roleId != null">
+				ROLE_ID = #{roleId,jdbcType=INTEGER},
+			</if>
+			<if test="jobAttach != null">
+				JOB_ATTACH = #{jobAttach,jdbcType=VARCHAR},
+			</if>
+			<if test="attach != null">
+				ATTACH = #{attach,jdbcType=VARCHAR},
+			</if>
+			<if test="hireSyle != null">
+				HIRE_SYLE = #{hireSyle,jdbcType=INTEGER},
+			</if>
+			<if test="cantactWay != null">
+				CANTACT_WAY = #{cantactWay,jdbcType=INTEGER},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="ipAddress != null">
+				IP_ADDRESS = #{ipAddress,jdbcType=VARCHAR},
+			</if>
+			<if test="publisher != null">
+				PUBLISHER = #{publisher,jdbcType=INTEGER},
+			</if>
+			<if test="specialistDes != null">
+				SPECIALIST_DES = #{specialistDes,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hn.dls.entity.Specialist">
+		update dls_specialist
+		set SPECIALIST_NAME = #{specialistName,jdbcType=VARCHAR},
+		SPECIAL_CODE = #{specialCode,jdbcType=VARCHAR},
+		PRICE = #{price,jdbcType=DECIMAL},
+		INDUSTRY = #{industry,jdbcType=INTEGER},
+		SPECIALTY = #{specialty,jdbcType=INTEGER},
+		JOB_DES = #{jobDes,jdbcType=VARCHAR},
+		HEAD_PIC = #{headPic,jdbcType=VARCHAR},
+		PIC = #{pic,jdbcType=VARCHAR},
+		PROVINCE = #{province,jdbcType=INTEGER},
+		RESPOND_TIME = #{respondTime,jdbcType=VARCHAR},
+		MEET_NUMBER = #{meetNumber,jdbcType=INTEGER},
+		LIKE_NUMBER = #{likeNumber,jdbcType=INTEGER},
+		APPOINTMENT = #{appointment,jdbcType=INTEGER},
+		STATUS = #{status,jdbcType=CHAR},
+		NATION = #{nation,jdbcType=INTEGER},
+		DANGDI = #{dangdi,jdbcType=CHAR},
+		SERVICE_ID = #{serviceId,jdbcType=INTEGER},
+		ROLE_ID = #{roleId,jdbcType=INTEGER},
+		JOB_ATTACH = #{jobAttach,jdbcType=VARCHAR},
+		ATTACH = #{attach,jdbcType=VARCHAR},
+		HIRE_SYLE = #{hireSyle,jdbcType=INTEGER},
+		CANTACT_WAY = #{cantactWay,jdbcType=INTEGER},
+		ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+		IP_ADDRESS = #{ipAddress,jdbcType=VARCHAR},
+		PUBLISHER = #{publisher,jdbcType=INTEGER},
+		SPECIALIST_DES = #{specialistDes,jdbcType=LONGVARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.Specialist">
+		update dls_specialist
+		set SPECIALIST_NAME = #{specialistName,jdbcType=VARCHAR},
+		SPECIAL_CODE = #{specialCode,jdbcType=VARCHAR},
+		PRICE = #{price,jdbcType=DECIMAL},
+		INDUSTRY = #{industry,jdbcType=INTEGER},
+		SPECIALTY = #{specialty,jdbcType=INTEGER},
+		JOB_DES = #{jobDes,jdbcType=VARCHAR},
+		HEAD_PIC = #{headPic,jdbcType=VARCHAR},
+		PIC = #{pic,jdbcType=VARCHAR},
+		PROVINCE = #{province,jdbcType=INTEGER},
+		RESPOND_TIME = #{respondTime,jdbcType=VARCHAR},
+		MEET_NUMBER = #{meetNumber,jdbcType=INTEGER},
+		LIKE_NUMBER = #{likeNumber,jdbcType=INTEGER},
+		APPOINTMENT = #{appointment,jdbcType=INTEGER},
+		STATUS = #{status,jdbcType=CHAR},
+		NATION = #{nation,jdbcType=INTEGER},
+		DANGDI = #{dangdi,jdbcType=CHAR},
+		SERVICE_ID = #{serviceId,jdbcType=INTEGER},
+		ROLE_ID = #{roleId,jdbcType=INTEGER},
+		JOB_ATTACH = #{jobAttach,jdbcType=VARCHAR},
+		ATTACH = #{attach,jdbcType=VARCHAR},
+		HIRE_SYLE = #{hireSyle,jdbcType=INTEGER},
+		CANTACT_WAY = #{cantactWay,jdbcType=INTEGER},
+		ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+		IP_ADDRESS = #{ipAddress,jdbcType=VARCHAR},
+		PUBLISHER = #{publisher,jdbcType=INTEGER}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 获取所有专家信息 -->
+	<select id="findAllMsg" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM
+		dls_specialist
+	</select>
 </mapper>
