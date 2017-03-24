@@ -92,7 +92,7 @@
 	
 	<!-- ====================数据源2==================== -->
 	
-	<bean id="sqlSessionTemplate2" class="org.mybatis.spring.SqlSessionTemplate">
+	<!-- <bean id="sqlSessionTemplate2" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory2" />
 	</bean>
 	<bean id="sqlSessionFactory2" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -139,6 +139,6 @@
 	</tx:advice>
 	<bean name="transactionManager2" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">   
     	<property name="dataSource" ref="dataSource2"></property>
- 	</bean>
+ 	</bean> -->
  	<!-- QQ313596790 -->
 </beans>
