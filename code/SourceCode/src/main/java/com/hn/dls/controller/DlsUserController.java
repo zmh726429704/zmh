@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,6 +59,8 @@ public class DlsUserController {
 			sysAppUser.setLastLogin(logintime);
 			sysAppUserService.saveLoginMsg(sysAppUser);
 			jsonObject = jsonObject.fromObject(sysAppUser);
+			HttpSession session =request.getSession();
+			session.setAttribute("loginUser", sysAppUser);
 			jsonObject.put("result", result);
 		}
 		jsonObject.put("result", result);
