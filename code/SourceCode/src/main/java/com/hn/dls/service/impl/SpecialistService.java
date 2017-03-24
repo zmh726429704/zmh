@@ -25,7 +25,7 @@ public class SpecialistService implements SpecialistManager {
 	@Override
 	public List<Specialist> findAllList() throws Exception {
 		
-		return (List<Specialist>) dlsDao.findForList("SpecialistMapper.findAllMsg", 123);
+		return (List<Specialist>) dlsDao.findForList("SpecialistMapper.findAllMsg", null);
 	}
 
 }

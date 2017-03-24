@@ -1,313 +1,333 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="ArticleMapper" >
-  <resultMap id="BaseResultMap" type="com.hn.dls.entity.Article" >
-    <id column="ID" property="id" jdbcType="INTEGER" />
-    <result column="TITLE" property="title" jdbcType="VARCHAR" />
-    <result column="SEO_TITLE" property="seoTitle" jdbcType="VARCHAR" />
-    <result column="SEO_KEYWORDS" property="seoKeywords" jdbcType="VARCHAR" />
-    <result column="SEO_DESCRIPTION" property="seoDescription" jdbcType="VARCHAR" />
-    <result column="SUMMARY" property="summary" jdbcType="VARCHAR" />
-    <result column="FK_CHANNEL_ID" property="fkChannelId" jdbcType="INTEGER" />
-    <result column="FK_CATEGORY_ID" property="fkCategoryId" jdbcType="INTEGER" />
-    <result column="AUTHOR" property="author" jdbcType="VARCHAR" />
-    <result column="SOURCE" property="source" jdbcType="VARCHAR" />
-    <result column="PIC" property="pic" jdbcType="VARCHAR" />
-    <result column="COLLECT_COUNT" property="collectCount" jdbcType="INTEGER" />
-    <result column="COMMENT_COUNT" property="commentCount" jdbcType="INTEGER" />
-    <result column="PRAISE_COUNT" property="praiseCount" jdbcType="INTEGER" />
-    <result column="IS_RECOMMEND" property="isRecommend" jdbcType="CHAR" />
-    <result column="SORT_ID" property="sortId" jdbcType="INTEGER" />
-    <result column="CLICK" property="click" jdbcType="INTEGER" />
-    <result column="FK_SYS_USER_ID" property="fkSysUserId" jdbcType="VARCHAR" />
-    <result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
-    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.hn.dls.entity.Article" extends="BaseResultMap" >
-    <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    ID, TITLE, SEO_TITLE, SEO_KEYWORDS, SEO_DESCRIPTION, SUMMARY, FK_CHANNEL_ID, FK_CATEGORY_ID, 
-    AUTHOR, SOURCE, PIC, COLLECT_COUNT, COMMENT_COUNT, PRAISE_COUNT, IS_RECOMMEND, SORT_ID, 
-    CLICK, FK_SYS_USER_ID, ADD_TIME, UPDATE_TIME
-  </sql>
-  <sql id="Blob_Column_List" >
-    CONTENT
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from dls_article
-    where ID = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from dls_article
-    where ID = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.hn.dls.entity.Article" >
-    insert into dls_article (ID, TITLE, SEO_TITLE, 
-      SEO_KEYWORDS, SEO_DESCRIPTION, SUMMARY, 
-      FK_CHANNEL_ID, FK_CATEGORY_ID, AUTHOR, 
-      SOURCE, PIC, COLLECT_COUNT, 
-      COMMENT_COUNT, PRAISE_COUNT, IS_RECOMMEND, 
-      SORT_ID, CLICK, FK_SYS_USER_ID, 
-      ADD_TIME, UPDATE_TIME, CONTENT
-      )
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{seoTitle,jdbcType=VARCHAR}, 
-      #{seoKeywords,jdbcType=VARCHAR}, #{seoDescription,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
-      #{fkChannelId,jdbcType=INTEGER}, #{fkCategoryId,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR}, 
-      #{source,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{collectCount,jdbcType=INTEGER}, 
-      #{commentCount,jdbcType=INTEGER}, #{praiseCount,jdbcType=INTEGER}, #{isRecommend,jdbcType=CHAR}, 
-      #{sortId,jdbcType=INTEGER}, #{click,jdbcType=INTEGER}, #{fkSysUserId,jdbcType=VARCHAR}, 
-      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.hn.dls.entity.Article" >
-    insert into dls_article
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        ID,
-      </if>
-      <if test="title != null" >
-        TITLE,
-      </if>
-      <if test="seoTitle != null" >
-        SEO_TITLE,
-      </if>
-      <if test="seoKeywords != null" >
-        SEO_KEYWORDS,
-      </if>
-      <if test="seoDescription != null" >
-        SEO_DESCRIPTION,
-      </if>
-      <if test="summary != null" >
-        SUMMARY,
-      </if>
-      <if test="fkChannelId != null" >
-        FK_CHANNEL_ID,
-      </if>
-      <if test="fkCategoryId != null" >
-        FK_CATEGORY_ID,
-      </if>
-      <if test="author != null" >
-        AUTHOR,
-      </if>
-      <if test="source != null" >
-        SOURCE,
-      </if>
-      <if test="pic != null" >
-        PIC,
-      </if>
-      <if test="collectCount != null" >
-        COLLECT_COUNT,
-      </if>
-      <if test="commentCount != null" >
-        COMMENT_COUNT,
-      </if>
-      <if test="praiseCount != null" >
-        PRAISE_COUNT,
-      </if>
-      <if test="isRecommend != null" >
-        IS_RECOMMEND,
-      </if>
-      <if test="sortId != null" >
-        SORT_ID,
-      </if>
-      <if test="click != null" >
-        CLICK,
-      </if>
-      <if test="fkSysUserId != null" >
-        FK_SYS_USER_ID,
-      </if>
-      <if test="addTime != null" >
-        ADD_TIME,
-      </if>
-      <if test="updateTime != null" >
-        UPDATE_TIME,
-      </if>
-      <if test="content != null" >
-        CONTENT,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="seoTitle != null" >
-        #{seoTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="seoKeywords != null" >
-        #{seoKeywords,jdbcType=VARCHAR},
-      </if>
-      <if test="seoDescription != null" >
-        #{seoDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="summary != null" >
-        #{summary,jdbcType=VARCHAR},
-      </if>
-      <if test="fkChannelId != null" >
-        #{fkChannelId,jdbcType=INTEGER},
-      </if>
-      <if test="fkCategoryId != null" >
-        #{fkCategoryId,jdbcType=INTEGER},
-      </if>
-      <if test="author != null" >
-        #{author,jdbcType=VARCHAR},
-      </if>
-      <if test="source != null" >
-        #{source,jdbcType=VARCHAR},
-      </if>
-      <if test="pic != null" >
-        #{pic,jdbcType=VARCHAR},
-      </if>
-      <if test="collectCount != null" >
-        #{collectCount,jdbcType=INTEGER},
-      </if>
-      <if test="commentCount != null" >
-        #{commentCount,jdbcType=INTEGER},
-      </if>
-      <if test="praiseCount != null" >
-        #{praiseCount,jdbcType=INTEGER},
-      </if>
-      <if test="isRecommend != null" >
-        #{isRecommend,jdbcType=CHAR},
-      </if>
-      <if test="sortId != null" >
-        #{sortId,jdbcType=INTEGER},
-      </if>
-      <if test="click != null" >
-        #{click,jdbcType=INTEGER},
-      </if>
-      <if test="fkSysUserId != null" >
-        #{fkSysUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="addTime != null" >
-        #{addTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="content != null" >
-        #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.hn.dls.entity.Article" >
-    update dls_article
-    <set >
-      <if test="title != null" >
-        TITLE = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="seoTitle != null" >
-        SEO_TITLE = #{seoTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="seoKeywords != null" >
-        SEO_KEYWORDS = #{seoKeywords,jdbcType=VARCHAR},
-      </if>
-      <if test="seoDescription != null" >
-        SEO_DESCRIPTION = #{seoDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="summary != null" >
-        SUMMARY = #{summary,jdbcType=VARCHAR},
-      </if>
-      <if test="fkChannelId != null" >
-        FK_CHANNEL_ID = #{fkChannelId,jdbcType=INTEGER},
-      </if>
-      <if test="fkCategoryId != null" >
-        FK_CATEGORY_ID = #{fkCategoryId,jdbcType=INTEGER},
-      </if>
-      <if test="author != null" >
-        AUTHOR = #{author,jdbcType=VARCHAR},
-      </if>
-      <if test="source != null" >
-        SOURCE = #{source,jdbcType=VARCHAR},
-      </if>
-      <if test="pic != null" >
-        PIC = #{pic,jdbcType=VARCHAR},
-      </if>
-      <if test="collectCount != null" >
-        COLLECT_COUNT = #{collectCount,jdbcType=INTEGER},
-      </if>
-      <if test="commentCount != null" >
-        COMMENT_COUNT = #{commentCount,jdbcType=INTEGER},
-      </if>
-      <if test="praiseCount != null" >
-        PRAISE_COUNT = #{praiseCount,jdbcType=INTEGER},
-      </if>
-      <if test="isRecommend != null" >
-        IS_RECOMMEND = #{isRecommend,jdbcType=CHAR},
-      </if>
-      <if test="sortId != null" >
-        SORT_ID = #{sortId,jdbcType=INTEGER},
-      </if>
-      <if test="click != null" >
-        CLICK = #{click,jdbcType=INTEGER},
-      </if>
-      <if test="fkSysUserId != null" >
-        FK_SYS_USER_ID = #{fkSysUserId,jdbcType=VARCHAR},
-      </if>
-      <if test="addTime != null" >
-        ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="content != null" >
-        CONTENT = #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hn.dls.entity.Article" >
-    update dls_article
-    set TITLE = #{title,jdbcType=VARCHAR},
-      SEO_TITLE = #{seoTitle,jdbcType=VARCHAR},
-      SEO_KEYWORDS = #{seoKeywords,jdbcType=VARCHAR},
-      SEO_DESCRIPTION = #{seoDescription,jdbcType=VARCHAR},
-      SUMMARY = #{summary,jdbcType=VARCHAR},
-      FK_CHANNEL_ID = #{fkChannelId,jdbcType=INTEGER},
-      FK_CATEGORY_ID = #{fkCategoryId,jdbcType=INTEGER},
-      AUTHOR = #{author,jdbcType=VARCHAR},
-      SOURCE = #{source,jdbcType=VARCHAR},
-      PIC = #{pic,jdbcType=VARCHAR},
-      COLLECT_COUNT = #{collectCount,jdbcType=INTEGER},
-      COMMENT_COUNT = #{commentCount,jdbcType=INTEGER},
-      PRAISE_COUNT = #{praiseCount,jdbcType=INTEGER},
-      IS_RECOMMEND = #{isRecommend,jdbcType=CHAR},
-      SORT_ID = #{sortId,jdbcType=INTEGER},
-      CLICK = #{click,jdbcType=INTEGER},
-      FK_SYS_USER_ID = #{fkSysUserId,jdbcType=VARCHAR},
-      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
-      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-      CONTENT = #{content,jdbcType=LONGVARCHAR}
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.Article" >
-    update dls_article
-    set TITLE = #{title,jdbcType=VARCHAR},
-      SEO_TITLE = #{seoTitle,jdbcType=VARCHAR},
-      SEO_KEYWORDS = #{seoKeywords,jdbcType=VARCHAR},
-      SEO_DESCRIPTION = #{seoDescription,jdbcType=VARCHAR},
-      SUMMARY = #{summary,jdbcType=VARCHAR},
-      FK_CHANNEL_ID = #{fkChannelId,jdbcType=INTEGER},
-      FK_CATEGORY_ID = #{fkCategoryId,jdbcType=INTEGER},
-      AUTHOR = #{author,jdbcType=VARCHAR},
-      SOURCE = #{source,jdbcType=VARCHAR},
-      PIC = #{pic,jdbcType=VARCHAR},
-      COLLECT_COUNT = #{collectCount,jdbcType=INTEGER},
-      COMMENT_COUNT = #{commentCount,jdbcType=INTEGER},
-      PRAISE_COUNT = #{praiseCount,jdbcType=INTEGER},
-      IS_RECOMMEND = #{isRecommend,jdbcType=CHAR},
-      SORT_ID = #{sortId,jdbcType=INTEGER},
-      CLICK = #{click,jdbcType=INTEGER},
-      FK_SYS_USER_ID = #{fkSysUserId,jdbcType=VARCHAR},
-      ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
-      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
-    where ID = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="ArticleMapper">
+	<resultMap id="BaseResultMap" type="com.hn.dls.entity.Article">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="TITLE" property="title" jdbcType="VARCHAR" />
+		<result column="SEO_TITLE" property="seoTitle" jdbcType="VARCHAR" />
+		<result column="SEO_KEYWORDS" property="seoKeywords" jdbcType="VARCHAR" />
+		<result column="SEO_DESCRIPTION" property="seoDescription"
+			jdbcType="VARCHAR" />
+		<result column="SUMMARY" property="summary" jdbcType="VARCHAR" />
+		<result column="FK_CHANNEL_ID" property="fkChannelId" jdbcType="INTEGER" />
+		<result column="FK_CATEGORY_ID" property="fkCategoryId"
+			jdbcType="INTEGER" />
+		<result column="AUTHOR" property="author" jdbcType="VARCHAR" />
+		<result column="SOURCE" property="source" jdbcType="VARCHAR" />
+		<result column="PIC" property="pic" jdbcType="VARCHAR" />
+		<result column="COLLECT_COUNT" property="collectCount"
+			jdbcType="INTEGER" />
+		<result column="COMMENT_COUNT" property="commentCount"
+			jdbcType="INTEGER" />
+		<result column="PRAISE_COUNT" property="praiseCount" jdbcType="INTEGER" />
+		<result column="IS_RECOMMEND" property="isRecommend" jdbcType="CHAR" />
+		<result column="SORT_ID" property="sortId" jdbcType="INTEGER" />
+		<result column="CLICK" property="click" jdbcType="INTEGER" />
+		<result column="FK_SYS_USER_ID" property="fkSysUserId"
+			jdbcType="VARCHAR" />
+		<result column="ADD_TIME" property="addTime" jdbcType="TIMESTAMP" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.hn.dls.entity.Article"
+		extends="BaseResultMap">
+		<result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, TITLE, SEO_TITLE, SEO_KEYWORDS, SEO_DESCRIPTION, SUMMARY,
+		FK_CHANNEL_ID, FK_CATEGORY_ID,
+		AUTHOR, SOURCE, PIC, COLLECT_COUNT, COMMENT_COUNT, PRAISE_COUNT,
+		IS_RECOMMEND, SORT_ID,
+		CLICK, FK_SYS_USER_ID, ADD_TIME, UPDATE_TIME
+	</sql>
+	<sql id="Blob_Column_List">
+		CONTENT
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from dls_article
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from dls_article
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.hn.dls.entity.Article">
+		insert into dls_article (ID, TITLE, SEO_TITLE,
+		SEO_KEYWORDS, SEO_DESCRIPTION, SUMMARY,
+		FK_CHANNEL_ID, FK_CATEGORY_ID, AUTHOR,
+		SOURCE, PIC, COLLECT_COUNT,
+		COMMENT_COUNT, PRAISE_COUNT, IS_RECOMMEND,
+		SORT_ID, CLICK, FK_SYS_USER_ID,
+		ADD_TIME, UPDATE_TIME, CONTENT
+		)
+		values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+		#{seoTitle,jdbcType=VARCHAR},
+		#{seoKeywords,jdbcType=VARCHAR}, #{seoDescription,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR},
+		#{fkChannelId,jdbcType=INTEGER}, #{fkCategoryId,jdbcType=INTEGER},
+		#{author,jdbcType=VARCHAR},
+		#{source,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{collectCount,jdbcType=INTEGER},
+		#{commentCount,jdbcType=INTEGER}, #{praiseCount,jdbcType=INTEGER},
+		#{isRecommend,jdbcType=CHAR},
+		#{sortId,jdbcType=INTEGER}, #{click,jdbcType=INTEGER}, #{fkSysUserId,jdbcType=VARCHAR},
+		#{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+		#{content,jdbcType=LONGVARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.hn.dls.entity.Article">
+		insert into dls_article
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="title != null">
+				TITLE,
+			</if>
+			<if test="seoTitle != null">
+				SEO_TITLE,
+			</if>
+			<if test="seoKeywords != null">
+				SEO_KEYWORDS,
+			</if>
+			<if test="seoDescription != null">
+				SEO_DESCRIPTION,
+			</if>
+			<if test="summary != null">
+				SUMMARY,
+			</if>
+			<if test="fkChannelId != null">
+				FK_CHANNEL_ID,
+			</if>
+			<if test="fkCategoryId != null">
+				FK_CATEGORY_ID,
+			</if>
+			<if test="author != null">
+				AUTHOR,
+			</if>
+			<if test="source != null">
+				SOURCE,
+			</if>
+			<if test="pic != null">
+				PIC,
+			</if>
+			<if test="collectCount != null">
+				COLLECT_COUNT,
+			</if>
+			<if test="commentCount != null">
+				COMMENT_COUNT,
+			</if>
+			<if test="praiseCount != null">
+				PRAISE_COUNT,
+			</if>
+			<if test="isRecommend != null">
+				IS_RECOMMEND,
+			</if>
+			<if test="sortId != null">
+				SORT_ID,
+			</if>
+			<if test="click != null">
+				CLICK,
+			</if>
+			<if test="fkSysUserId != null">
+				FK_SYS_USER_ID,
+			</if>
+			<if test="addTime != null">
+				ADD_TIME,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="content != null">
+				CONTENT,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="seoTitle != null">
+				#{seoTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="seoKeywords != null">
+				#{seoKeywords,jdbcType=VARCHAR},
+			</if>
+			<if test="seoDescription != null">
+				#{seoDescription,jdbcType=VARCHAR},
+			</if>
+			<if test="summary != null">
+				#{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="fkChannelId != null">
+				#{fkChannelId,jdbcType=INTEGER},
+			</if>
+			<if test="fkCategoryId != null">
+				#{fkCategoryId,jdbcType=INTEGER},
+			</if>
+			<if test="author != null">
+				#{author,jdbcType=VARCHAR},
+			</if>
+			<if test="source != null">
+				#{source,jdbcType=VARCHAR},
+			</if>
+			<if test="pic != null">
+				#{pic,jdbcType=VARCHAR},
+			</if>
+			<if test="collectCount != null">
+				#{collectCount,jdbcType=INTEGER},
+			</if>
+			<if test="commentCount != null">
+				#{commentCount,jdbcType=INTEGER},
+			</if>
+			<if test="praiseCount != null">
+				#{praiseCount,jdbcType=INTEGER},
+			</if>
+			<if test="isRecommend != null">
+				#{isRecommend,jdbcType=CHAR},
+			</if>
+			<if test="sortId != null">
+				#{sortId,jdbcType=INTEGER},
+			</if>
+			<if test="click != null">
+				#{click,jdbcType=INTEGER},
+			</if>
+			<if test="fkSysUserId != null">
+				#{fkSysUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				#{addTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hn.dls.entity.Article">
+		update dls_article
+		<set>
+			<if test="title != null">
+				TITLE = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="seoTitle != null">
+				SEO_TITLE = #{seoTitle,jdbcType=VARCHAR},
+			</if>
+			<if test="seoKeywords != null">
+				SEO_KEYWORDS = #{seoKeywords,jdbcType=VARCHAR},
+			</if>
+			<if test="seoDescription != null">
+				SEO_DESCRIPTION = #{seoDescription,jdbcType=VARCHAR},
+			</if>
+			<if test="summary != null">
+				SUMMARY = #{summary,jdbcType=VARCHAR},
+			</if>
+			<if test="fkChannelId != null">
+				FK_CHANNEL_ID = #{fkChannelId,jdbcType=INTEGER},
+			</if>
+			<if test="fkCategoryId != null">
+				FK_CATEGORY_ID = #{fkCategoryId,jdbcType=INTEGER},
+			</if>
+			<if test="author != null">
+				AUTHOR = #{author,jdbcType=VARCHAR},
+			</if>
+			<if test="source != null">
+				SOURCE = #{source,jdbcType=VARCHAR},
+			</if>
+			<if test="pic != null">
+				PIC = #{pic,jdbcType=VARCHAR},
+			</if>
+			<if test="collectCount != null">
+				COLLECT_COUNT = #{collectCount,jdbcType=INTEGER},
+			</if>
+			<if test="commentCount != null">
+				COMMENT_COUNT = #{commentCount,jdbcType=INTEGER},
+			</if>
+			<if test="praiseCount != null">
+				PRAISE_COUNT = #{praiseCount,jdbcType=INTEGER},
+			</if>
+			<if test="isRecommend != null">
+				IS_RECOMMEND = #{isRecommend,jdbcType=CHAR},
+			</if>
+			<if test="sortId != null">
+				SORT_ID = #{sortId,jdbcType=INTEGER},
+			</if>
+			<if test="click != null">
+				CLICK = #{click,jdbcType=INTEGER},
+			</if>
+			<if test="fkSysUserId != null">
+				FK_SYS_USER_ID = #{fkSysUserId,jdbcType=VARCHAR},
+			</if>
+			<if test="addTime != null">
+				ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hn.dls.entity.Article">
+		update dls_article
+		set TITLE = #{title,jdbcType=VARCHAR},
+		SEO_TITLE = #{seoTitle,jdbcType=VARCHAR},
+		SEO_KEYWORDS = #{seoKeywords,jdbcType=VARCHAR},
+		SEO_DESCRIPTION = #{seoDescription,jdbcType=VARCHAR},
+		SUMMARY = #{summary,jdbcType=VARCHAR},
+		FK_CHANNEL_ID = #{fkChannelId,jdbcType=INTEGER},
+		FK_CATEGORY_ID = #{fkCategoryId,jdbcType=INTEGER},
+		AUTHOR = #{author,jdbcType=VARCHAR},
+		SOURCE = #{source,jdbcType=VARCHAR},
+		PIC = #{pic,jdbcType=VARCHAR},
+		COLLECT_COUNT = #{collectCount,jdbcType=INTEGER},
+		COMMENT_COUNT = #{commentCount,jdbcType=INTEGER},
+		PRAISE_COUNT = #{praiseCount,jdbcType=INTEGER},
+		IS_RECOMMEND = #{isRecommend,jdbcType=CHAR},
+		SORT_ID = #{sortId,jdbcType=INTEGER},
+		CLICK = #{click,jdbcType=INTEGER},
+		FK_SYS_USER_ID = #{fkSysUserId,jdbcType=VARCHAR},
+		ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+		CONTENT = #{content,jdbcType=LONGVARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.Article">
+		update dls_article
+		set TITLE = #{title,jdbcType=VARCHAR},
+		SEO_TITLE = #{seoTitle,jdbcType=VARCHAR},
+		SEO_KEYWORDS = #{seoKeywords,jdbcType=VARCHAR},
+		SEO_DESCRIPTION = #{seoDescription,jdbcType=VARCHAR},
+		SUMMARY = #{summary,jdbcType=VARCHAR},
+		FK_CHANNEL_ID = #{fkChannelId,jdbcType=INTEGER},
+		FK_CATEGORY_ID = #{fkCategoryId,jdbcType=INTEGER},
+		AUTHOR = #{author,jdbcType=VARCHAR},
+		SOURCE = #{source,jdbcType=VARCHAR},
+		PIC = #{pic,jdbcType=VARCHAR},
+		COLLECT_COUNT = #{collectCount,jdbcType=INTEGER},
+		COMMENT_COUNT = #{commentCount,jdbcType=INTEGER},
+		PRAISE_COUNT = #{praiseCount,jdbcType=INTEGER},
+		IS_RECOMMEND = #{isRecommend,jdbcType=CHAR},
+		SORT_ID = #{sortId,jdbcType=INTEGER},
+		CLICK = #{click,jdbcType=INTEGER},
+		FK_SYS_USER_ID = #{fkSysUserId,jdbcType=VARCHAR},
+		ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 获取所有文章 -->
+	<select id="getAllMsg" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List"/>
+		FROM
+		dls_article
+	</select>
 </mapper>
