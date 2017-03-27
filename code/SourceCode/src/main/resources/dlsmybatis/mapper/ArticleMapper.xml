@@ -33,9 +33,11 @@
 		<result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		ID, TITLE, SEO_TITLE, SEO_KEYWORDS, SEO_DESCRIPTION, SUMMARY,
+		ID, TITLE, SEO_TITLE, SEO_KEYWORDS, SEO_DESCRIPTION,
+		SUMMARY,
 		FK_CHANNEL_ID, FK_CATEGORY_ID,
-		AUTHOR, SOURCE, PIC, COLLECT_COUNT, COMMENT_COUNT, PRAISE_COUNT,
+		AUTHOR, SOURCE, PIC,
+		COLLECT_COUNT, COMMENT_COUNT, PRAISE_COUNT,
 		IS_RECOMMEND, SORT_ID,
 		CLICK, FK_SYS_USER_ID, ADD_TIME, UPDATE_TIME
 	</sql>
@@ -52,27 +54,34 @@
 		where ID = #{id,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from dls_article
+		delete from
+		dls_article
 		where ID = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.hn.dls.entity.Article">
-		insert into dls_article (ID, TITLE, SEO_TITLE,
+		insert into dls_article (ID,
+		TITLE, SEO_TITLE,
 		SEO_KEYWORDS, SEO_DESCRIPTION, SUMMARY,
 		FK_CHANNEL_ID, FK_CATEGORY_ID, AUTHOR,
 		SOURCE, PIC, COLLECT_COUNT,
 		COMMENT_COUNT, PRAISE_COUNT, IS_RECOMMEND,
-		SORT_ID, CLICK, FK_SYS_USER_ID,
+		SORT_ID, CLICK,
+		FK_SYS_USER_ID,
 		ADD_TIME, UPDATE_TIME, CONTENT
 		)
-		values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+		values
+		(#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
 		#{seoTitle,jdbcType=VARCHAR},
-		#{seoKeywords,jdbcType=VARCHAR}, #{seoDescription,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR},
+		#{seoKeywords,jdbcType=VARCHAR},
+		#{seoDescription,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR},
 		#{fkChannelId,jdbcType=INTEGER}, #{fkCategoryId,jdbcType=INTEGER},
 		#{author,jdbcType=VARCHAR},
-		#{source,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{collectCount,jdbcType=INTEGER},
+		#{source,jdbcType=VARCHAR},
+		#{pic,jdbcType=VARCHAR}, #{collectCount,jdbcType=INTEGER},
 		#{commentCount,jdbcType=INTEGER}, #{praiseCount,jdbcType=INTEGER},
 		#{isRecommend,jdbcType=CHAR},
-		#{sortId,jdbcType=INTEGER}, #{click,jdbcType=INTEGER}, #{fkSysUserId,jdbcType=VARCHAR},
+		#{sortId,jdbcType=INTEGER},
+		#{click,jdbcType=INTEGER}, #{fkSysUserId,jdbcType=VARCHAR},
 		#{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
 		#{content,jdbcType=LONGVARCHAR}
 		)
@@ -277,57 +286,85 @@
 		where ID = #{id,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hn.dls.entity.Article">
-		update dls_article
+		update
+		dls_article
 		set TITLE = #{title,jdbcType=VARCHAR},
-		SEO_TITLE = #{seoTitle,jdbcType=VARCHAR},
-		SEO_KEYWORDS = #{seoKeywords,jdbcType=VARCHAR},
-		SEO_DESCRIPTION = #{seoDescription,jdbcType=VARCHAR},
-		SUMMARY = #{summary,jdbcType=VARCHAR},
-		FK_CHANNEL_ID = #{fkChannelId,jdbcType=INTEGER},
-		FK_CATEGORY_ID = #{fkCategoryId,jdbcType=INTEGER},
+		SEO_TITLE =
+		#{seoTitle,jdbcType=VARCHAR},
+		SEO_KEYWORDS =
+		#{seoKeywords,jdbcType=VARCHAR},
+		SEO_DESCRIPTION =
+		#{seoDescription,jdbcType=VARCHAR},
+		SUMMARY =
+		#{summary,jdbcType=VARCHAR},
+		FK_CHANNEL_ID =
+		#{fkChannelId,jdbcType=INTEGER},
+		FK_CATEGORY_ID =
+		#{fkCategoryId,jdbcType=INTEGER},
 		AUTHOR = #{author,jdbcType=VARCHAR},
 		SOURCE = #{source,jdbcType=VARCHAR},
 		PIC = #{pic,jdbcType=VARCHAR},
 		COLLECT_COUNT = #{collectCount,jdbcType=INTEGER},
-		COMMENT_COUNT = #{commentCount,jdbcType=INTEGER},
-		PRAISE_COUNT = #{praiseCount,jdbcType=INTEGER},
-		IS_RECOMMEND = #{isRecommend,jdbcType=CHAR},
+		COMMENT_COUNT =
+		#{commentCount,jdbcType=INTEGER},
+		PRAISE_COUNT =
+		#{praiseCount,jdbcType=INTEGER},
+		IS_RECOMMEND =
+		#{isRecommend,jdbcType=CHAR},
 		SORT_ID = #{sortId,jdbcType=INTEGER},
 		CLICK = #{click,jdbcType=INTEGER},
-		FK_SYS_USER_ID = #{fkSysUserId,jdbcType=VARCHAR},
-		ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
-		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
-		CONTENT = #{content,jdbcType=LONGVARCHAR}
+		FK_SYS_USER_ID =
+		#{fkSysUserId,jdbcType=VARCHAR},
+		ADD_TIME =
+		#{addTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME =
+		#{updateTime,jdbcType=TIMESTAMP},
+		CONTENT =
+		#{content,jdbcType=LONGVARCHAR}
 		where ID = #{id,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.hn.dls.entity.Article">
 		update dls_article
 		set TITLE = #{title,jdbcType=VARCHAR},
-		SEO_TITLE = #{seoTitle,jdbcType=VARCHAR},
-		SEO_KEYWORDS = #{seoKeywords,jdbcType=VARCHAR},
-		SEO_DESCRIPTION = #{seoDescription,jdbcType=VARCHAR},
-		SUMMARY = #{summary,jdbcType=VARCHAR},
-		FK_CHANNEL_ID = #{fkChannelId,jdbcType=INTEGER},
-		FK_CATEGORY_ID = #{fkCategoryId,jdbcType=INTEGER},
+		SEO_TITLE =
+		#{seoTitle,jdbcType=VARCHAR},
+		SEO_KEYWORDS =
+		#{seoKeywords,jdbcType=VARCHAR},
+		SEO_DESCRIPTION =
+		#{seoDescription,jdbcType=VARCHAR},
+		SUMMARY =
+		#{summary,jdbcType=VARCHAR},
+		FK_CHANNEL_ID =
+		#{fkChannelId,jdbcType=INTEGER},
+		FK_CATEGORY_ID =
+		#{fkCategoryId,jdbcType=INTEGER},
 		AUTHOR = #{author,jdbcType=VARCHAR},
 		SOURCE = #{source,jdbcType=VARCHAR},
 		PIC = #{pic,jdbcType=VARCHAR},
 		COLLECT_COUNT = #{collectCount,jdbcType=INTEGER},
-		COMMENT_COUNT = #{commentCount,jdbcType=INTEGER},
-		PRAISE_COUNT = #{praiseCount,jdbcType=INTEGER},
-		IS_RECOMMEND = #{isRecommend,jdbcType=CHAR},
+		COMMENT_COUNT =
+		#{commentCount,jdbcType=INTEGER},
+		PRAISE_COUNT =
+		#{praiseCount,jdbcType=INTEGER},
+		IS_RECOMMEND =
+		#{isRecommend,jdbcType=CHAR},
 		SORT_ID = #{sortId,jdbcType=INTEGER},
 		CLICK = #{click,jdbcType=INTEGER},
-		FK_SYS_USER_ID = #{fkSysUserId,jdbcType=VARCHAR},
-		ADD_TIME = #{addTime,jdbcType=TIMESTAMP},
-		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+		FK_SYS_USER_ID =
+		#{fkSysUserId,jdbcType=VARCHAR},
+		ADD_TIME =
+		#{addTime,jdbcType=TIMESTAMP},
+		UPDATE_TIME =
+		#{updateTime,jdbcType=TIMESTAMP}
 		where ID = #{id,jdbcType=INTEGER}
 	</update>
 	<!-- 获取所有文章 -->
 	<select id="getAllMsg" resultMap="BaseResultMap">
 		SELECT
-		<include refid="Base_Column_List"/>
+		<include refid="Base_Column_List" />
 		FROM
 		dls_article
+		ORDER BY
+		ADD_TIME
 	</select>
 </mapper>
