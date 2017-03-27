@@ -23,7 +23,7 @@ public class ArticleController {
 	private ArticleManager articleService;
 	
 	/**
-	 * 获取所有文章
+	 * 获取所有文章按时间排序
 	 * @param request
 	 * @param response
 	 * @return
